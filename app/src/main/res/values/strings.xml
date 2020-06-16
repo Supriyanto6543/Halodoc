@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Halodoc</string>
+
+    <string name="name">Your name</string>
+    <string name="address">Your address</string>
 </resources>
