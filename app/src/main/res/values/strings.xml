@@ -3,4 +3,6 @@
 
     <string name="name">Your name</string>
     <string name="address">Your address</string>
+    <string name="buatjanji">Buat Janji RS</string>
+    <string name="bebas">Bebas antre di RS</string>
 </resources>
