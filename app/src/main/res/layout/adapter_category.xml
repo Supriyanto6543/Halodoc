@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="15dp"
         app:cardMaxElevation="10dp"
         android:elevation="10dp"
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -18,13 +19,18 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/image"
                 android:src="@drawable/ic_home"
-                android:layout_width="70dp"
-                android:layout_height="70dp"/>
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
 
             <TextView
+                android:id="@+id/title"
                 android:text="@string/buatjanji"
-                android:textSize="20dp"
+                android:textSize="15dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -38,15 +44,18 @@
                 <TextView
                     android:id="@+id/desc"
                     android:text="@string/bebas"
-                    android:textSize="15dp"
+                    android:textSize="13dp"
                     android:layout_weight="99"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"/>
 
                 <ImageView
                     android:id="@+id/more"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:src="@drawable/ic_arrow"/>
 
             </LinearLayout>

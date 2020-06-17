@@ -58,6 +58,7 @@
             android:layout_height="wrap_content">
 
             <FrameLayout
+                android:id="@+id/frame"
                 android:layout_above="@id/space"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>

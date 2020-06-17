@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.halodoc.medical.fragment.ActivityHome;
 import com.luseen.spacenavigation.SpaceItem;
 import com.luseen.spacenavigation.SpaceNavigationView;
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         spaceNavigationView.addSpaceItem(new SpaceItem("LAINNYA", R.drawable.ic_home));
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame, new ActivityHome()).commit();
 
     }
 
