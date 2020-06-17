@@ -18,9 +18,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.halodoc.medical.R;
 import com.halodoc.medical.adapter.AdapterCategory;
+import com.halodoc.medical.adapter.AdapterNews;
 import com.halodoc.medical.adapter.AdapterSlider;
 import com.halodoc.medical.adapter.AdapterTag;
 import com.halodoc.medical.modal.CategoryModal;
+import com.halodoc.medical.modal.NewsModal;
 import com.halodoc.medical.modal.SliderModal;
 import com.halodoc.medical.modal.TagModal;
 
@@ -30,12 +32,14 @@ import java.util.Random;
 
 public class ActivityHome extends Fragment {
 
-    RecyclerView recyclerView, recyclerView0;
+    RecyclerView recyclerView, recyclerView0, recyclerView1;
     AdapterCategory adapterCategory;
     AdapterTag adapterTag;
+    AdapterNews adapterNews;
     ArrayList<CategoryModal> cm;
     ArrayList<SliderModal> sm;
     ArrayList<TagModal> tm;
+    ArrayList<NewsModal> nm;
     ViewPager2 viewPager2;
 
     @Nullable
@@ -46,6 +50,7 @@ public class ActivityHome extends Fragment {
         initsCategory(view);
         initsSlider(view);
         initsTags(view);
+        initsNews(view);
 
         return view;
     }
@@ -100,6 +105,14 @@ public class ActivityHome extends Fragment {
         recyclerView0.setAdapter(adapterTag);
     }
 
+    private void initsNews(View view){
+        recyclerView1 = view.findViewById(R.id.recycler1);
+        nm = new ArrayList<>();
+        recyclerView1.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+        adapterNews = new AdapterNews(addingItemNews(nm), getActivity());
+        recyclerView1.setAdapter(adapterNews);
+    }
+
     private ArrayList<CategoryModal> addingItem(ArrayList<CategoryModal> modals){
 
         modals.add(new CategoryModal(R.drawable.nurse1, "Chat dengan Dokter", "Dokter terpercaya"));
@@ -119,6 +132,17 @@ public class ActivityHome extends Fragment {
         tagModals.add(new TagModal("Doctor Umum"));
 
         return tagModals;
+    }
+
+    private ArrayList<NewsModal> addingItemNews(ArrayList<NewsModal> newsModals){
+
+        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
+        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
+        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
+        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
+        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
+
+        return newsModals;
     }
 
     private Runnable slider = new Runnable() {

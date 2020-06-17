@@ -30,7 +30,7 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View inflater = LayoutInflater.from(context).inflate(R.layout.adapter_category, parent, false);
+        View inflater = LayoutInflater.from(context).inflate(R.layout.adapter_news, parent, false);
 
         return new AdapterNews.MyAdapter(inflater);
 
@@ -38,8 +38,9 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((AdapterNews.MyAdapter) holder).image.setImageDrawable(context.getResources().getDrawable(categoryModals.get(position).getImage()));
-        ((AdapterNews.MyAdapter) holder).title.setText(categoryModals.get(position).getTitle());
+        ((MyAdapter) holder).image.setImageDrawable(context.getResources().getDrawable(categoryModals.get(position).getImage()));
+        ((MyAdapter) holder).title.setText(categoryModals.get(position).getTitle());
+        ((MyAdapter) holder).category.setText(categoryModals.get(position).getCategory());
     }
 
     @Override
@@ -50,13 +51,13 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public class MyAdapter extends RecyclerView.ViewHolder{
 
         private ImageView image;
-        private TextView title, desc;
+        private TextView title, category;
 
         public MyAdapter(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             title = itemView.findViewById(R.id.title);
-            desc = itemView.findViewById(R.id.desc);
+            category = itemView.findViewById(R.id.category);
         }
     }
 }
