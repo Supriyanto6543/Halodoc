@@ -2,6 +2,10 @@
     <string name="app_name">Halodoc</string>
 
     <string name="name">Your name</string>
+    <string name="user">Abdul Aziz</string>
+    <string name="fix_addres">Jawa Barat</string>
+    <string name="my_address">Alamat</string>
+    <string name="my_name">Nama</string>
     <string name="address">Your address</string>
     <string name="buatjanji">Buat Janji RS</string>
     <string name="bebas">Bebas antre di RS</string>

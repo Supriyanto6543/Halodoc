@@ -1,15 +1,19 @@
 package com.halodoc.medical.adapter;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.halodoc.medical.ActivityCategory;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.CategoryModal;
 
@@ -36,10 +40,17 @@ public class AdapterCategory extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ((MyAdapter) holder).image.setImageDrawable(context.getResources().getDrawable(categoryModals.get(position).getImage()));
         ((MyAdapter) holder).title.setText(categoryModals.get(position).getTitle());
         ((MyAdapter) holder).desc.setText(categoryModals.get(position).getDesc());
+        ((MyAdapter) holder).itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ActivityCategory.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

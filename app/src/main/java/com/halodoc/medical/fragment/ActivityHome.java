@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,6 +43,7 @@ public class ActivityHome extends Fragment {
     ArrayList<TagModal> tm;
     ArrayList<NewsModal> nm;
     ViewPager2 viewPager2;
+    TextView lihat_semua;
 
     @Nullable
     @Override
@@ -51,7 +54,13 @@ public class ActivityHome extends Fragment {
         initsSlider(view);
         initsTags(view);
         initsNews(view);
-
+        lihat_semua = view.findViewById(R.id.lihat_semua);
+        lihat_semua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Click Lihat Semua", Toast.LENGTH_LONG).show();
+            }
+        });
         return view;
     }
 
