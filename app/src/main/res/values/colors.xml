@@ -6,8 +6,10 @@
 
     <color name="white">#ffffff</color>
     <color name="red">#FF9800</color>
+    <color name="red_mode">#E91E63</color>
     <color name="reds">#F60303</color>
     <color name="black">#000000</color>
     <color name="brown">#BFBFBF</color>
     <color name="brown1">#EDEDED</color>
+    <color name="brown2">#C3C3C3</color>
 </resources>

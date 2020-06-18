@@ -2,6 +2,14 @@
     <string name="app_name">Halodoc</string>
 
     <string name="name">Your name</string>
+    <string name="name_doctor">Dr. Agus hendra Rao Timoro Susilo</string>
+    <string name="job">Doctor Umum</string>
+    <string name="price">Rp. 30.000</string>
+    <string name="rating">100%</string>
+    <string name="suka">Suka</string>
+    <string name="pengetahuan">Pengetahuan</string>
+    <string name="experience">3 Tahun</string>
+    <string name="chat">CHAT</string>
     <string name="user">Abdul Aziz</string>
     <string name="fix_addres">Jawa Barat</string>
     <string name="my_address">Alamat</string>

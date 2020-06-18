@@ -16,8 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActivityCategory"/>
+        <activity android:name=".ActivityDokter"/>
         <activity android:name=".ActivityCategoryAll"/>
+        <activity android:name=".ActivityDokterDetail"/>
+        <activity android:name=".ActivityChat"/>
     </application>
 
 </manifest>
