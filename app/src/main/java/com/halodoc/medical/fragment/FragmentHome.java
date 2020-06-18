@@ -82,7 +82,7 @@ public class FragmentHome extends Fragment {
         sm.add(new SliderModal(R.drawable.banner1));
         sm.add(new SliderModal(R.drawable.banner2));
         sm.add(new SliderModal(R.drawable.banner3));
-        viewPager2.setAdapter(new AdapterSlider(sm, viewPager2));
+        viewPager2.setAdapter(new AdapterSlider(sm, viewPager2, getActivity()));
 
         viewPager2.setClipToPadding(false);
         viewPager2.setClipChildren(false);

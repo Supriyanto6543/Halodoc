@@ -1,6 +1,7 @@
 package com.halodoc.medical.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.halodoc.medical.ActivityDetailTag;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.SliderModal;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 
-public class AdapterSlider extends RecyclerView.Adapter<AdapterSlider.SliderCarousel>{
+public class AdapterSlider extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private ArrayList<SliderModal> sliderModals;
     private Context context;
     private ViewPager2 viewPager2;
 
-    public AdapterSlider(ArrayList<SliderModal> sliderModals, ViewPager2 viewPager2) {
+    public AdapterSlider(ArrayList<SliderModal> sliderModals, ViewPager2 viewPager2, Context context) {
         this.sliderModals = sliderModals;
         this.viewPager2 = viewPager2;
+        this.context = context;
     }
 
     @NonNull
@@ -36,12 +39,13 @@ public class AdapterSlider extends RecyclerView.Adapter<AdapterSlider.SliderCaro
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SliderCarousel holder, final int position) {
-        holder.setImage(sliderModals.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
+        ((SliderCarousel) holder).roundedImageView.setImageResource(sliderModals.get(position).getImage());
+        ((SliderCarousel) holder).roundedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "GAMBAR NO " + position + "KLIK", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, ActivityDetailTag.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -64,6 +68,7 @@ public class AdapterSlider extends RecyclerView.Adapter<AdapterSlider.SliderCaro
         void setImage(SliderModal sliderModal){
             roundedImageView.setImageResource(sliderModal.getImage());
         }
+
     }
 
 }
