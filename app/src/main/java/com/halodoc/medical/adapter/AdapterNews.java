@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,10 +39,16 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         ((MyAdapter) holder).image.setImageDrawable(context.getResources().getDrawable(categoryModals.get(position).getImage()));
         ((MyAdapter) holder).title.setText(categoryModals.get(position).getTitle());
         ((MyAdapter) holder).category.setText(categoryModals.get(position).getCategory());
+        ((MyAdapter) holder).itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "DETAIL NEWS " + position + " DIKLIK", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

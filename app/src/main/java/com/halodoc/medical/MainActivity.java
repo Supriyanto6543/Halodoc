@@ -43,11 +43,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (pos){
                     case 0:
                         changeFragment(new FragmentProfile());
-                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
                         break;
                     case 1:
                         changeFragment(new FragmentLainnya());
-                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
                         break;
 
                     default:
@@ -60,11 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 switch (pos){
                     case 0:
                         changeFragment(new FragmentProfile());
-                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
                         break;
                     case 1:
                         changeFragment(new FragmentLainnya());
-                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
                         break;
 
                     default:

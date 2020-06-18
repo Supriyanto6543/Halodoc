@@ -1,10 +1,12 @@
 package com.halodoc.medical.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.halodoc.medical.ActivityCategoryAll;
 import com.halodoc.medical.R;
 import com.halodoc.medical.adapter.AdapterCategory;
 import com.halodoc.medical.adapter.AdapterNews;
@@ -58,7 +61,8 @@ public class FragmentHome extends Fragment {
         lihat_semua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Click Lihat Semua", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(), ActivityCategoryAll.class);
+                startActivity(intent);
             }
         });
         return view;

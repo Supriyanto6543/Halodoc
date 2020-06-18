@@ -21,6 +21,7 @@
         <activity android:name=".ActivityDokterDetail"/>
         <activity android:name=".ActivityChat"/>
         <activity android:name=".ActivityProfile"/>
+        <activity android:name=".ActivityDetailTag"/>
     </application>
 
 </manifest>

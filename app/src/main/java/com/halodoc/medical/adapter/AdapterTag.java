@@ -1,6 +1,7 @@
 package com.halodoc.medical.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.halodoc.medical.ActivityDetailTag;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.SliderModal;
 import com.halodoc.medical.modal.TagModal;
@@ -39,6 +41,13 @@ public class AdapterTag extends RecyclerView.Adapter<AdapterTag.AdapterTags> {
     public void onBindViewHolder(@NonNull AdapterTag.AdapterTags holder, int position) {
 
         ((AdapterTags) holder).category.setText(sliderModals.get(position).getName());
+        ((AdapterTags) holder).itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ActivityDetailTag.class);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

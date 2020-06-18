@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,8 +36,14 @@ public class AdapterSlider extends RecyclerView.Adapter<AdapterSlider.SliderCaro
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SliderCarousel holder, int position) {
+    public void onBindViewHolder(@NonNull SliderCarousel holder, final int position) {
         holder.setImage(sliderModals.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "GAMBAR NO " + position + "KLIK", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
