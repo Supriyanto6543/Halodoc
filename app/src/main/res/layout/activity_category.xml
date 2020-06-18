@@ -10,28 +10,21 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/abl"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:theme="@style/AppTheme.AppBarOverlay">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimaryDark"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-            </com.google.android.material.appbar.AppBarLayout>
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimaryDark"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         </RelativeLayout>
 
         <RelativeLayout
+            android:background="@color/brown1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

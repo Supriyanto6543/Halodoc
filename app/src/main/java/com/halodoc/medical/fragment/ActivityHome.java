@@ -101,7 +101,7 @@ public class ActivityHome extends Fragment {
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
                 new Handler().removeCallbacks(slider);
-                new Handler().postDelayed(slider, 7000);
+                new Handler().postDelayed(slider, 15000);
             }
         });
     }
