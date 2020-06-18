@@ -1,65 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center"
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimaryDark"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:text="Lengkapi profile kamu"
-                android:textSize="17dp"
-                android:textColor="@color/black"
-                android:gravity="center_horizontal"
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="match_parent">
 
-            <TextView
-                android:text="Untuk mempermudah kami melayani kamu dengan baik"
-                android:gravity="center_horizontal"
-                android:textSize="16dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:text="Lengkapi profile kamu"
+                    android:textSize="17dp"
+                    android:textColor="@color/black"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:src="@drawable/form"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="200dp"/>
+                <TextView
+                    android:text="Untuk mempermudah kami melayani kamu dengan baik"
+                    android:gravity="center_horizontal"
+                    android:textSize="16dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <View
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/reds"/>
+                <ImageView
+                    android:src="@drawable/form"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"/>
 
-            <Button
-                android:id="@+id/chat"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentBottom="true"
-                android:text="LENGKAPI DETAIL"
-                android:textSize="17dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:textColor="@color/white"
-                android:background="@drawable/customize2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <View
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/reds"/>
 
-        </LinearLayout>
+                <Button
+                    android:id="@+id/chat"
+                    android:layout_marginTop="20dp"
+                    android:layout_alignParentBottom="true"
+                    android:text="LENGKAPI DETAIL"
+                    android:textSize="17dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:textColor="@color/white"
+                    android:background="@drawable/customize2"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"/>
 
-    </RelativeLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

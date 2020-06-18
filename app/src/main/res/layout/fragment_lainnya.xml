@@ -1,12 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:text="LAINNYA"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimaryDark"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logo"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_job"
+                        android:layout_weight="10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@id/logo"
+                        android:text="Pengingat"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="10"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logo1"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_job"
+                        android:layout_weight="10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@id/logo1"
+                        android:text="Dompet"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_toLeftOf="@+id/more"
+                        android:text="Rp 1.000.000"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:textColor="@color/red_mode"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:id="@+id/more"
+                        android:src="@drawable/ic_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="10"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logo3"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_job"
+                        android:layout_weight="10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@id/logo3"
+                        android:text="Paket Berlangganan"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="10"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logo4"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_job"
+                        android:layout_weight="10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@id/logo4"
+                        android:text="Daftar Alamat"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="10"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logo5"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_job"
+                        android:layout_weight="10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@id/logo5"
+                        android:text="Bantuan"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="10"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_margin="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logo6"
+                        android:layout_alignParentLeft="true"
+                        android:src="@drawable/ic_job"
+                        android:layout_weight="10"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"/>
+
+                    <TextView
+                        android:layout_toRightOf="@id/logo6"
+                        android:text="Pengaturan Aplikasi"
+                        android:paddingStart="5dp"
+                        android:textSize="21dp"
+                        android:layout_weight="80"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:src="@drawable/ic_arrow"
+                        android:layout_alignParentRight="true"
+                        android:layout_weight="10"
+                        android:layout_width="20dp"
+                        android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

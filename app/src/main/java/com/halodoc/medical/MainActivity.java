@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.halodoc.medical.fragment.FragmentHome;
 import com.halodoc.medical.fragment.FragmentLainnya;
@@ -38,19 +39,36 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(int itemIndex, String itemName) {
-                switch (itemIndex){
+                int pos = itemIndex;
+                switch (pos){
                     case 0:
                         changeFragment(new FragmentProfile());
+                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
                         break;
                     case 1:
                         changeFragment(new FragmentLainnya());
+                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
                         break;
+
+                    default:
                 }
             }
 
             @Override
             public void onItemReselected(int itemIndex, String itemName) {
+                int pos = itemIndex;
+                switch (pos){
+                    case 0:
+                        changeFragment(new FragmentProfile());
+                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
+                        break;
+                    case 1:
+                        changeFragment(new FragmentLainnya());
+                        Toast.makeText(getApplicationContext(), "KAMU KLIK" + pos, Toast.LENGTH_LONG).show();
+                        break;
 
+                    default:
+                }
             }
         });
 
