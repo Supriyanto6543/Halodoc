@@ -20,6 +20,7 @@
         <activity android:name=".ActivityCategoryAll"/>
         <activity android:name=".ActivityDokterDetail"/>
         <activity android:name=".ActivityChat"/>
+        <activity android:name=".ActivityProfile"/>
     </application>
 
 </manifest>

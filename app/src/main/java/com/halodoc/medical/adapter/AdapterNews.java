@@ -1,6 +1,7 @@
 package com.halodoc.medical.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,12 +53,15 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         private ImageView image;
         private TextView title, category;
+        private Typeface typeface;
 
         public MyAdapter(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             title = itemView.findViewById(R.id.title);
             category = itemView.findViewById(R.id.category);
+            typeface = Typeface.createFromAsset(context.getAssets(), "avenir3.otf");
+            title.setTypeface(typeface);
         }
     }
 }

@@ -135,7 +135,7 @@
                         android:id="@+id/chat"
                         android:text="@string/chat"
                         android:textColor="@color/white"
-                        android:background="@color/red_mode"
+                        android:background="@drawable/customize2"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"/>
 

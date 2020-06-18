@@ -158,6 +158,7 @@
 
             <LinearLayout
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:paddingTop="10dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
@@ -220,7 +221,7 @@
                     android:layout_marginTop="50dp"
                     android:text="@string/chat"
                     android:textColor="@color/white"
-                    android:background="@color/red_mode"
+                    android:background="@drawable/customize2"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"/>
 

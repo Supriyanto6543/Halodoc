@@ -32,7 +32,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ActivityHome extends Fragment {
+public class FragmentHome extends Fragment {
 
     RecyclerView recyclerView, recyclerView0, recyclerView1;
     AdapterCategory adapterCategory;
