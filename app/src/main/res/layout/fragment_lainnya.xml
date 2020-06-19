@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content">
 
                 <RelativeLayout
+                    android:id="@+id/pengingat"
                     android:layout_margin="10dp"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
@@ -111,6 +112,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/langganan"
                     android:layout_margin="10dp"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
@@ -143,6 +145,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/alamat"
                     android:layout_margin="10dp"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
@@ -175,6 +178,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/bantuan"
                     android:layout_margin="10dp"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"

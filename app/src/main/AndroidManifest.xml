@@ -25,6 +25,8 @@
         <activity android:name=".ActivityPengaturan"/>
         <activity android:name=".ActivityProfileLengkap"/>
         <activity android:name=".ActivityDompet"/>
+        <activity android:name=".ActivityLangganan"/>
+        <activity android:name=".ActivityBantuan"/>
     </application>
 
 </manifest>
