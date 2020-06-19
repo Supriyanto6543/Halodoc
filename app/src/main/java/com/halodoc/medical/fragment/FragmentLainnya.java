@@ -13,13 +13,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.halodoc.medical.ActivityDompet;
 import com.halodoc.medical.ActivityPengaturan;
 import com.halodoc.medical.R;
 
 public class FragmentLainnya extends Fragment {
 
     Toolbar toolbar;
-    RelativeLayout pengaturan;
+    RelativeLayout pengaturan, dompet;
 
     @Nullable
     @Override
@@ -29,6 +30,15 @@ public class FragmentLainnya extends Fragment {
         toolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle("Lainnya");
+
+        dompet = view.findViewById(R.id.dompet);
+        dompet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ActivityDompet.class);
+                startActivity(intent);
+            }
+        });
         pengaturan = view.findViewById(R.id.pengaturan);
         pengaturan.setOnClickListener(new View.OnClickListener() {
             @Override

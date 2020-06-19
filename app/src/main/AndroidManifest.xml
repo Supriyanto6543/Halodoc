@@ -24,6 +24,7 @@
         <activity android:name=".ActivityDetailTag"/>
         <activity android:name=".ActivityPengaturan"/>
         <activity android:name=".ActivityProfileLengkap"/>
+        <activity android:name=".ActivityDompet"/>
     </application>
 
 </manifest>

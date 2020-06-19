@@ -66,6 +66,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/dompet"
                     android:layout_margin="10dp"
                     android:gravity="center_vertical"
                     android:layout_gravity="center_vertical"
