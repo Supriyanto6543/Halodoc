@@ -1,5 +1,6 @@
 package com.halodoc.medical;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,7 +47,8 @@ public class ActivityProfile extends AppCompatActivity {
                 if (names.isEmpty() && ttls.isEmpty() && berats.isEmpty() &&  hps.isEmpty() && emails.isEmpty() && tinggis.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Silahkan lengkapi semua data", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(getApplicationContext(), "BERHASIL EDIT DATA", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), ActivityProfileLengkap.class);
+                    startActivity(intent);
                 }
             }
         });

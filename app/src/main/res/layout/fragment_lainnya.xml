@@ -56,6 +56,7 @@
                         android:layout_height="wrap_content"/>
 
                     <ImageView
+                        android:id="@+id/arrow"
                         android:src="@drawable/ic_arrow"
                         android:layout_alignParentRight="true"
                         android:layout_weight="10"
@@ -74,7 +75,7 @@
                     <ImageView
                         android:id="@+id/logo1"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_job"
+                        android:src="@drawable/ic_wallet"
                         android:layout_weight="10"
                         android:layout_width="25dp"
                         android:layout_height="25dp"/>
@@ -117,7 +118,7 @@
                     <ImageView
                         android:id="@+id/logo3"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_job"
+                        android:src="@drawable/ic_subs"
                         android:layout_weight="10"
                         android:layout_width="25dp"
                         android:layout_height="25dp"/>
@@ -149,7 +150,7 @@
                     <ImageView
                         android:id="@+id/logo4"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_job"
+                        android:src="@drawable/ic_maps"
                         android:layout_weight="10"
                         android:layout_width="25dp"
                         android:layout_height="25dp"/>
@@ -181,7 +182,7 @@
                     <ImageView
                         android:id="@+id/logo5"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_job"
+                        android:src="@drawable/ic_help"
                         android:layout_weight="10"
                         android:layout_width="25dp"
                         android:layout_height="25dp"/>
@@ -205,6 +206,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/pengaturan"
                     android:layout_margin="10dp"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
@@ -213,7 +215,7 @@
                     <ImageView
                         android:id="@+id/logo6"
                         android:layout_alignParentLeft="true"
-                        android:src="@drawable/ic_job"
+                        android:src="@drawable/ic_setting"
                         android:layout_weight="10"
                         android:layout_width="25dp"
                         android:layout_height="25dp"/>
@@ -239,6 +241,23 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_marginTop="50dp"
+            android:text="KELUAR"
+            android:textSize="19dp"
+            android:textColor="@color/red_mode"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:text="Versi Aplikasi 7.400"
+            android:textSize="15dp"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

@@ -23,211 +23,217 @@
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:orientation="vertical"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                app:cardUseCompatPadding="true"
-                app:cardCornerRadius="7dp"
-                app:cardMaxElevation="5dp"
-                android:elevation="5dp"
-                app:cardElevation="5dp"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@color/brown1"
+                <androidx.cardview.widget.CardView
+                    app:cardUseCompatPadding="true"
+                    app:cardCornerRadius="7dp"
+                    app:cardMaxElevation="5dp"
+                    android:elevation="5dp"
+                    app:cardElevation="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:src="@drawable/docotrel1"
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"/>
-
-                    <TextView
-                        android:id="@+id/title"
-                        android:text="@string/name_doctor"
-                        android:textSize="19dp"
-                        android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:paddingTop="5dp"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:textColor="@color/black"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/job"
-                        android:text="@string/job"
-                        android:paddingTop="5dp"
-                        android:textSize="17dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:id="@+id/price"
-                        android:text="@string/price"
-                        android:textSize="17dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:textColor="@color/black"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
                     <LinearLayout
-                        android:gravity="center_horizontal"
-                        android:weightSum="100"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:background="@color/brown1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
+                        <ImageView
+                            android:src="@drawable/docotrel1"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"/>
+
+                        <TextView
+                            android:id="@+id/title"
+                            android:text="@string/name_doctor"
+                            android:textSize="19dp"
+                            android:textStyle="bold"
+                            android:ellipsize="end"
+                            android:paddingTop="5dp"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/job"
+                            android:text="@string/job"
+                            android:paddingTop="5dp"
+                            android:textSize="17dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:id="@+id/price"
+                            android:text="@string/price"
+                            android:textSize="17dp"
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
                         <LinearLayout
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_weight="50"
-                            android:layout_width="0dp"
+                            android:gravity="center_horizontal"
+                            android:weightSum="100"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                            <ImageView
-                                android:src="@drawable/ic_like"
-                                android:tint="@color/brown2"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"/>
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:layout_weight="50"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
 
-                            <TextView
-                                android:id="@+id/rating"
-                                android:text="@string/rating"
-                                android:textSize="17dp"
-                                android:paddingStart="6dp"
-                                android:paddingEnd="6dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:src="@drawable/ic_like"
+                                    android:tint="@color/brown2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"/>
 
-                            <TextView
-                                android:text="@string/suka"
-                                android:textSize="17dp"
-                                android:paddingStart="6dp"
-                                android:paddingEnd="6dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:id="@+id/rating"
+                                    android:text="@string/rating"
+                                    android:textSize="17dp"
+                                    android:paddingStart="6dp"
+                                    android:paddingEnd="6dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
 
-                        </LinearLayout>
+                                <TextView
+                                    android:text="@string/suka"
+                                    android:textSize="17dp"
+                                    android:paddingStart="6dp"
+                                    android:paddingEnd="6dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
 
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_weight="50"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content">
+                            </LinearLayout>
 
-                            <ImageView
-                                android:src="@drawable/ic_job"
-                                android:tint="@color/brown2"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"/>
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:gravity="center"
+                                android:layout_weight="50"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content">
 
-                            <TextView
-                                android:id="@+id/experience"
-                                android:text="@string/rating"
-                                android:textSize="17dp"
-                                android:paddingStart="6dp"
-                                android:paddingEnd="6dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                <ImageView
+                                    android:src="@drawable/ic_job"
+                                    android:tint="@color/brown2"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"/>
 
-                            <TextView
-                                android:text="@string/pengetahuan"
-                                android:textSize="17dp"
-                                android:paddingStart="6dp"
-                                android:paddingEnd="6dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"/>
+                                <TextView
+                                    android:id="@+id/experience"
+                                    android:text="@string/rating"
+                                    android:textSize="17dp"
+                                    android:paddingStart="6dp"
+                                    android:paddingEnd="6dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                                <TextView
+                                    android:text="@string/pengetahuan"
+                                    android:textSize="17dp"
+                                    android:paddingStart="6dp"
+                                    android:paddingEnd="6dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
                     </LinearLayout>
 
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingTop="10dp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:text="Alumni"
+                        android:textSize="19dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="@string/name_doctor"
+                        android:textSize="19dp"
+                        android:textStyle="bold"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="Tempat Praktik"
+                        android:textSize="19dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="Puskesmas Kec. Bantimurung Kab. Maros, Sulsel"
+                        android:textSize="17dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="Nomor STR"
+                        android:textSize="19dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="5dp"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="7321100118183820"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <Button
+                        android:id="@+id/chat"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="50dp"
+                        android:text="@string/chat"
+                        android:textColor="@color/white"
+                        android:background="@drawable/customize2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"/>
+
                 </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:paddingTop="10dp"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Alumni"
-                    android:textSize="19dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                
-                <TextView
-                    android:text="@string/name_doctor"
-                    android:textSize="19dp"
-                    android:textStyle="bold"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:text="Tempat Praktik"
-                    android:textSize="19dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:text="Puskesmas Kec. Bantimurung Kab. Maros, Sulsel"
-                    android:textSize="17dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:text="Nomor STR"
-                    android:textSize="19dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="5dp"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <TextView
-                    android:text="7321100118183820"
-                    android:textSize="17dp"
-                    android:textColor="@color/black"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-
-                <Button
-                    android:id="@+id/chat"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="50dp"
-                    android:text="@string/chat"
-                    android:textColor="@color/white"
-                    android:background="@drawable/customize2"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"/>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 

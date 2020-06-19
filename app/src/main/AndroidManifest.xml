@@ -22,6 +22,8 @@
         <activity android:name=".ActivityChat"/>
         <activity android:name=".ActivityProfile"/>
         <activity android:name=".ActivityDetailTag"/>
+        <activity android:name=".ActivityPengaturan"/>
+        <activity android:name=".ActivityProfileLengkap"/>
     </application>
 
 </manifest>
