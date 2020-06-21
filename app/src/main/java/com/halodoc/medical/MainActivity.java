@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         spaceNavigationView = (SpaceNavigationView) findViewById(R.id.space);
+        spaceNavigationView.showIconOnly();
         spaceNavigationView.initWithSaveInstanceState(savedInstanceState);
         spaceNavigationView.setCentreButtonIcon(R.drawable.ic_android);
         spaceNavigationView.addSpaceItem(new SpaceItem("PROFILE", R.drawable.ic_account));
