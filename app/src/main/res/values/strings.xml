@@ -22,4 +22,8 @@
     <string name="offers">Penawaran Menarik</string>
     <string name="know">Tahukah kamu?</string>
     <string name="titles">Kondisi yang membutuhkan Kateteriasasi Otak</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="generate_otp">Generate OTP</string>
+    <string name="received_message">Received Message</string>
+    <string name="verify_otp">Verify OTP</string>
 </resources>
