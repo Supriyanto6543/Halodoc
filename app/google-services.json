@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "154700453021",
+    "firebase_url": "https://halodoc-45820.firebaseio.com",
+    "project_id": "halodoc-45820",
+    "storage_bucket": "halodoc-45820.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:154700453021:android:1c0ef1c59ae5f85de07074",
+        "android_client_info": {
+          "package_name": "com.halodoc.medical"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "154700453021-v9trds13l7mgb5eo376ro4cleog9hivs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD7zL0ShD1t7MjBsE6rUlsgGfEe3aBVtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "154700453021-v9trds13l7mgb5eo376ro4cleog9hivs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

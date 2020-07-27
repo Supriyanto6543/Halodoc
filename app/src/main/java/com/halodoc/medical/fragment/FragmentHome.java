@@ -20,6 +20,8 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.halodoc.medical.ActivityCategoryAll;
 import com.halodoc.medical.R;
 import com.halodoc.medical.adapter.AdapterCategory;
@@ -47,17 +49,24 @@ public class FragmentHome extends Fragment {
     ArrayList<NewsModal> nm;
     ViewPager2 viewPager2;
     TextView lihat_semua;
+    FirebaseUser fu;
+    FirebaseAuth auth;
+    TextView email;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_dashboard, container, false);
+
+        auth = FirebaseAuth.getInstance();
+
         initsCategory(view);
         initsSlider(view);
         initsTags(view);
         initsNews(view);
         lihat_semua = view.findViewById(R.id.lihat_semua);
+        email = view.findViewById(R.id.email);
         lihat_semua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +74,11 @@ public class FragmentHome extends Fragment {
                 startActivity(intent);
             }
         });
+
+        fu = auth.getCurrentUser();
+
+        email.setText(fu.getEmail());
+
         return view;
     }
 
