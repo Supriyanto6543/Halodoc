@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 public class SliderModal implements Serializable {
 
-    private int Image;
+    private String image;
 
-    public SliderModal(int image) {
-        Image = image;
+    public SliderModal(String image) {
+        this.image = image;
     }
 
-    public int getImage() {
-        return Image;
+    public String getImage() {
+        return image;
     }
 
-    public void setImage(int image) {
-        Image = image;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -1,14 +1,14 @@
 package com.halodoc.medical.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +20,12 @@ import androidx.viewpager2.widget.CompositePageTransformer;
 import androidx.viewpager2.widget.MarginPageTransformer;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.halodoc.medical.ActivityCategoryAll;
@@ -28,43 +34,58 @@ import com.halodoc.medical.adapter.AdapterCategory;
 import com.halodoc.medical.adapter.AdapterNews;
 import com.halodoc.medical.adapter.AdapterSlider;
 import com.halodoc.medical.adapter.AdapterTag;
+import com.halodoc.medical.constant.Constants;
 import com.halodoc.medical.modal.CategoryModal;
-import com.halodoc.medical.modal.NewsModal;
+import com.halodoc.medical.modal.ProductModal;
 import com.halodoc.medical.modal.SliderModal;
 import com.halodoc.medical.modal.TagModal;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
-import java.lang.reflect.Array;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Random;
 
 public class FragmentHome extends Fragment {
 
     RecyclerView recyclerView, recyclerView0, recyclerView1;
     AdapterCategory adapterCategory;
-    AdapterTag adapterTag;
     AdapterNews adapterNews;
     ArrayList<CategoryModal> cm;
-    ArrayList<SliderModal> sm;
+    ArrayList<SliderModal> arrayList;
     ArrayList<TagModal> tm;
-    ArrayList<NewsModal> nm;
-    ViewPager2 viewPager2;
+    ArrayList<ProductModal> productModals;
+    AdapterSlider adapterSlider;
     TextView lihat_semua;
     FirebaseUser fu;
     FirebaseAuth auth;
     TextView email;
+    SliderView imageSlider;
+    RequestQueue queue;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.activity_dashboard, container, false);
-
+        queue = Volley.newRequestQueue(getActivity());
         auth = FirebaseAuth.getInstance();
 
         initsCategory(view);
-        initsSlider(view);
-        initsTags(view);
         initsNews(view);
+        imageSlider = view.findViewById(R.id.imageSlider);
+        arrayList = new ArrayList<>();
+        getSlider();
+        imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        imageSlider.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        imageSlider.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        imageSlider.setIndicatorSelectedColor(Color.WHITE);
+        imageSlider.setIndicatorUnselectedColor(Color.GRAY);
+        imageSlider.setScrollTimeInSec(4); //set scroll delay in seconds :
+        imageSlider.startAutoCycle();
+
         lihat_semua = view.findViewById(R.id.lihat_semua);
         email = view.findViewById(R.id.email);
         lihat_semua.setOnClickListener(new View.OnClickListener() {
@@ -76,106 +97,125 @@ public class FragmentHome extends Fragment {
         });
 
         fu = auth.getCurrentUser();
-
-        email.setText(fu.getEmail());
+        getProduct();
 
         return view;
     }
 
     private void initsCategory(View view){
-        recyclerView = view.findViewById(R.id.recycler);
+        recyclerView = view.findViewById(R.id.category);
         cm = new ArrayList<>();
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        adapterCategory = new AdapterCategory(addingItem(cm), getActivity());
-        recyclerView.setAdapter(adapterCategory);
+        getCategory();
     }
 
-    private void initsSlider(View view){
-        viewPager2 = view.findViewById(R.id.viewpager);
-        sm = new ArrayList<>();
-        sm.add(new SliderModal(R.drawable.banner1));
-        sm.add(new SliderModal(R.drawable.banner2));
-        sm.add(new SliderModal(R.drawable.banner3));
-        viewPager2.setAdapter(new AdapterSlider(sm, viewPager2, getActivity()));
-
-        viewPager2.setClipToPadding(false);
-        viewPager2.setClipChildren(false);
-        viewPager2.setOffscreenPageLimit(3);
-        viewPager2.getChildAt(0).setOverScrollMode(RecyclerView.OVER_SCROLL_NEVER);
-
-        CompositePageTransformer cpt = new CompositePageTransformer();
-        cpt.addTransformer(new MarginPageTransformer(40));
-        cpt.addTransformer(new ViewPager2.PageTransformer() {
-            @Override
-            public void transformPage(@NonNull View page, float position) {
-                float ss = Math.abs(position);
-                page.setScaleY(0.85f + ss * 0.15f);
-            }
-        });
-        viewPager2.setPageTransformer(cpt);
-
-        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                new Handler().removeCallbacks(slider);
-                new Handler().postDelayed(slider, 15000);
-            }
-        });
-    }
-
-    private void initsTags(View view){
-        recyclerView0 = view.findViewById(R.id.recycler0);
-        tm = new ArrayList<>();
-        recyclerView0.setLayoutManager(new GridLayoutManager(getActivity(), 1, LinearLayoutManager.HORIZONTAL, false));
-        adapterTag = new AdapterTag(addingItemTag(tm), getActivity());
-        recyclerView0.setAdapter(adapterTag);
-    }
 
     private void initsNews(View view){
         recyclerView1 = view.findViewById(R.id.recycler1);
-        nm = new ArrayList<>();
+        productModals = new ArrayList<>();
         recyclerView1.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-        adapterNews = new AdapterNews(addingItemNews(nm), getActivity());
-        recyclerView1.setAdapter(adapterNews);
     }
 
-    private ArrayList<CategoryModal> addingItem(ArrayList<CategoryModal> modals){
+    private void getSlider(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.NEWS, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    JSONObject object = response.getJSONObject(Constants.JSON_ROOT);
+                    JSONArray array = object.getJSONArray(Constants.NEWS_FIELD);
 
-        modals.add(new CategoryModal(R.drawable.nurse1, "Chat dengan Dokter", "Dokter terpercaya"));
-        modals.add(new CategoryModal(R.drawable.nurse3, "Beli Obat", "Apotek terpercaya"));
-        modals.add(new CategoryModal(R.drawable.nurse4, "Tes Covid 19", "Dari apotek terpercaya"));
-        modals.add(new CategoryModal(R.drawable.nurse1, "Kesehatan Jiwa", "Temukan jawabanmu"));
+                    for (int i = 0; i < array.length(); i++){
+                        JSONObject object1 = array.getJSONObject(i);
+                        String image_cat = object1.getString("image_cat");
+                        SliderModal sm = new SliderModal(image_cat);
+                        arrayList.add(sm);
+                        adapterSlider = new AdapterSlider(getActivity(), arrayList);
+                        imageSlider.setSliderAdapter(adapterSlider);
+                    }
 
-        return modals;
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("KOM", error.getMessage());
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
-    private ArrayList<TagModal> addingItemTag(ArrayList<TagModal> tagModals){
+    private void getCategory(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.CATEGORY, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    JSONObject object = response.getJSONObject(Constants.JSON_ROOT);
+                    JSONArray array = object.getJSONArray(Constants.CATEGORY_FIELD);
 
-        tagModals.add(new TagModal("Kesehatan"));
-        tagModals.add(new TagModal("Covid 19"));
-        tagModals.add(new TagModal("Perawatan"));
-        tagModals.add(new TagModal("Pasien"));
-        tagModals.add(new TagModal("Doctor Umum"));
+                    for (int i = 0; i < array.length(); i++){
+                        JSONObject object1 = array.getJSONObject(i);
 
-        return tagModals;
+                        String id_cat = object1.getString("id_cat");
+                        String name_cat = object1.getString("name_cat");
+                        String image_cat = object1.getString("image_cat");
+
+                       CategoryModal cmm = new CategoryModal(Integer.valueOf(id_cat), name_cat, image_cat);
+                       cm.add(cmm);
+                       adapterCategory = new AdapterCategory(cm, getActivity());
+                       recyclerView.setAdapter(adapterCategory);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("KOM", error.getMessage());
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
-    private ArrayList<NewsModal> addingItemNews(ArrayList<NewsModal> newsModals){
+    private void getProduct(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.PRODUCT, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    JSONObject object = response.getJSONObject(Constants.JSON_ROOT);
+                    JSONArray array = object.getJSONArray(Constants.PRODUCT_FIELD);
 
-        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
-        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
+                    for (int i = 0; i < array.length(); i++){
+                        JSONObject object1 = array.getJSONObject(i);
+                        String id_product = object1.getString("id_product");
+                        String name_product = object1.getString("name_product");
+                        String image_product = object1.getString("image_product");
+                        String deskripsi = object1.getString("deskripsi");
+                        String price_product = object1.getString("price_product");
+                        String discount = object1.getString("discount");
 
-        return newsModals;
+                        ProductModal pm = new ProductModal(Integer.parseInt(id_product), name_product, image_product, deskripsi, price_product, discount);
+                        productModals.add(pm);
+                        adapterNews = new AdapterNews(productModals, getActivity());
+                        recyclerView1.setAdapter(adapterNews);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
-
-    private Runnable slider = new Runnable() {
-        @Override
-        public void run() {
-            viewPager2.setCurrentItem(viewPager2.getCurrentItem() + 1);
-        }
-    };
 }

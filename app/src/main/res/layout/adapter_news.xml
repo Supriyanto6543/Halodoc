@@ -28,16 +28,26 @@
                 android:textSize="17dp"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"
-                android:background="@drawable/customize1"
+                android:background="@color/black"
                 android:text="@string/name"
+                android:textColor="@color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/title"
+                android:textColor="@color/black"
                 android:textSize="19dp"
                 android:text="@string/titles"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/price"
+                android:textSize="19dp"
+                android:text="$ 123"
+                android:background="@drawable/custom_line"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>

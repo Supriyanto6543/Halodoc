@@ -2,9 +2,13 @@ package com.halodoc.medical.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -15,60 +19,50 @@ import com.halodoc.medical.ActivityDetailTag;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.SliderModal;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.smarteist.autoimageslider.SliderViewAdapter;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class AdapterSlider extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class AdapterSlider extends SliderViewAdapter<AdapterSlider.SliderAdapterVH> {
 
     private ArrayList<SliderModal> sliderModals;
     private Context context;
-    private ViewPager2 viewPager2;
 
-    public AdapterSlider(ArrayList<SliderModal> sliderModals, ViewPager2 viewPager2, Context context) {
-        this.sliderModals = sliderModals;
-        this.viewPager2 = viewPager2;
+    public AdapterSlider(Context context, ArrayList<SliderModal> ms) {
         this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public SliderCarousel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_slider, parent, false);
-
-        return new SliderCarousel(view);
+        this.sliderModals = ms;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        ((SliderCarousel) holder).roundedImageView.setImageResource(sliderModals.get(position).getImage());
-        ((SliderCarousel) holder).roundedImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ActivityDetailTag.class);
-                context.startActivity(intent);
-            }
-        });
+    public AdapterSlider.SliderAdapterVH onCreateViewHolder(ViewGroup parent) {
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_slider, parent, false);
+
+        return new SliderAdapterVH(view);
     }
 
     @Override
-    public int getItemCount() {
+    public void onBindViewHolder(AdapterSlider.SliderAdapterVH viewHolder, int position) {
+        Picasso.get().load(sliderModals.get(position).getImage()).into(((SliderAdapterVH) viewHolder).image);
+        Log.d("PHOTO", sliderModals.get(position).getImage());
+    }
+
+    @Override
+    public int getCount() {
         return sliderModals.size();
     }
 
+    class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
 
-    public class SliderCarousel extends RecyclerView.ViewHolder{
 
-        RoundedImageView roundedImageView;
+        ImageView image;
+        TextView title;
+        Typeface typeface;
 
-        public SliderCarousel(@NonNull View itemView) {
+        public SliderAdapterVH(View itemView) {
             super(itemView);
-            roundedImageView = itemView.findViewById(R.id.image);
+            image = itemView.findViewById(R.id.image);
+            title = itemView.findViewById(R.id.title);
         }
-
-        void setImage(SliderModal sliderModal){
-            roundedImageView.setImageResource(sliderModal.getImage());
-        }
-
     }
-
 }

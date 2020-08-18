@@ -13,17 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.halodoc.medical.R;
-import com.halodoc.medical.modal.CategoryModal;
-import com.halodoc.medical.modal.NewsModal;
+import com.halodoc.medical.modal.ProductModal;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
-    private ArrayList<NewsModal> categoryModals;
+    private ArrayList<ProductModal> categoryModals;
     private Context context;
 
-    public AdapterNews(ArrayList<NewsModal> categoryModals, Context context) {
+    public AdapterNews(ArrayList<ProductModal> categoryModals, Context context) {
         this.categoryModals = categoryModals;
         this.context = context;
     }
@@ -40,9 +40,10 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        ((MyAdapter) holder).image.setImageDrawable(context.getResources().getDrawable(categoryModals.get(position).getImage()));
-        ((MyAdapter) holder).title.setText(categoryModals.get(position).getTitle());
-        ((MyAdapter) holder).category.setText(categoryModals.get(position).getCategory());
+
+        ((MyAdapter) holder).title.setText(categoryModals.get(position).getName_product());
+        ((MyAdapter) holder).price.setText("Rp " + categoryModals.get(position).getPrice_product());
+        Picasso.get().load(categoryModals.get(position).getImage_product()).into(((MyAdapter) holder).image);
         ((MyAdapter) holder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,16 +60,18 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public class MyAdapter extends RecyclerView.ViewHolder{
 
         private ImageView image;
-        private TextView title, category;
+        private TextView title, category, price;
         private Typeface typeface;
 
         public MyAdapter(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             title = itemView.findViewById(R.id.title);
+            price = itemView.findViewById(R.id.price);
             category = itemView.findViewById(R.id.category);
-            typeface = Typeface.createFromAsset(context.getAssets(), "avenir3.otf");
+            typeface = Typeface.createFromAsset(context.getAssets(), "fon.otf");
             title.setTypeface(typeface);
+            price.setTypeface(typeface);
         }
     }
 }

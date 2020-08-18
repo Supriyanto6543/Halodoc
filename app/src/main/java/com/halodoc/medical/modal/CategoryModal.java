@@ -4,22 +4,21 @@ import java.io.Serializable;
 
 public class CategoryModal implements Serializable {
 
-    private int image;
-    private String title;
-    private String desc;
+    private int id;
+    private String title, image;
 
-    public CategoryModal(int image, String title, String desc) {
-        this.image = image;
+    public CategoryModal(int id, String title, String image) {
+        this.id = id;
         this.title = title;
-        this.desc = desc;
-    }
-
-    public int getImage() {
-        return image;
-    }
-
-    public void setImage(int image) {
         this.image = image;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -30,11 +29,11 @@ public class CategoryModal implements Serializable {
         this.title = title;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getImage() {
+        return image;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setImage(String image) {
+        this.image = image;
     }
 }

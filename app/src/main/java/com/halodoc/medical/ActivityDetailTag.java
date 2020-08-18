@@ -3,7 +3,6 @@ package com.halodoc.medical;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,14 +11,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.halodoc.medical.adapter.AdapterNews;
-import com.halodoc.medical.modal.NewsModal;
+import com.halodoc.medical.modal.ProductModal;
 
 import java.util.ArrayList;
 
 public class ActivityDetailTag extends AppCompatActivity {
 
     Toolbar toolbar;
-    ArrayList<NewsModal> nm;
+    ArrayList<ProductModal> nm;
     RecyclerView recyclerView;
     AdapterNews adapterNews;
 
@@ -46,33 +45,8 @@ public class ActivityDetailTag extends AppCompatActivity {
         recyclerView.setAdapter(adapterNews);
     }
 
-    private ArrayList<NewsModal> addingItemNews(ArrayList<NewsModal> newsModals){
+    private ArrayList<ProductModal> addingItemNews(ArrayList<ProductModal> newsModals){
 
-        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
-        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
-        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
-        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
-        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Doctor", "Berotabat Langsung ke Dokter Apabila Sakit"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Kesehatan", "Jangan Lupa jaga Kesehatan di Pandemi ini"));
-        newsModals.add(new NewsModal(R.drawable.banner2, "Makanan", "Makan dan Minum yang Membuat Tubuh Menjadi Sehat"));
-        newsModals.add(new NewsModal(R.drawable.banner1, "Berobat", "Jangan Lupa Meminum Obat atau Resep dari Dokter"));
-        newsModals.add(new NewsModal(R.drawable.banner3, "Protein", "Protein adalah Sumber Kekuatan Bagi Manusia"));
 
         return newsModals;
     }

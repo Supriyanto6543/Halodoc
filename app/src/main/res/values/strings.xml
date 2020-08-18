@@ -20,10 +20,13 @@
     <string name="kami">Kami disini untuk kamu!</string>
     <string name="lihat">Lihat semua</string>
     <string name="offers">Penawaran Menarik</string>
-    <string name="know">Tahukah kamu?</string>
+    <string name="know">Product Kami</string>
     <string name="titles">Kondisi yang membutuhkan Kateteriasasi Otak</string>
     <string name="send_otp">Send OTP</string>
     <string name="generate_otp">Generate OTP</string>
     <string name="received_message">Received Message</string>
     <string name="verify_otp">Verify OTP</string>
+    <string name="message_login">Kamu bisa daftar dengan menggunakan akun Gmail agar lebih aman dan mudah.</string>
+    <string name="google">Google</string>
+    <string name="client_google">251236537679-caggb32kvanac30on3mif8o3i4bivvaf.apps.googleusercontent.com</string>
 </resources>
