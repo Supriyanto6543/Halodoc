@@ -17,6 +17,8 @@
     <string name="address">Your address</string>
     <string name="buatjanji">Buat Janji RS</string>
     <string name="bebas">Bebas antre di RS</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
     <string name="doctor">Chat dengan dokter</string>
     <string name="kami">Kami disini untuk kamu!</string>
     <string name="lihat">Lihat semua</string>

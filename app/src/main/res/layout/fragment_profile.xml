@@ -60,28 +60,95 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <LinearLayout
-                    android:layout_marginTop="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-
-
-                </LinearLayout>
-
-
             </LinearLayout>
 
         </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/login_field"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:weightSum="100"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_login"
+                android:tint="@color/black"
+                android:layout_weight="10"
+                android:layout_width="40dp"
+                android:layout_height="20dp"/>
+
+            <LinearLayout
+                android:layout_weight="80"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/login"
+                    android:text="@string/login"
+                    android:textSize="18dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:src="@drawable/ic_arrow"
+                android:layout_weight="10"
+                android:tint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logout_field"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:weightSum="100"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_logout"
+                android:tint="@color/black"
+                android:layout_weight="10"
+                android:layout_width="40dp"
+                android:layout_height="20dp"/>
+
+            <LinearLayout
+                android:layout_weight="80"
+                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/logout"
+                    android:text="@string/logout"
+                    android:textSize="18dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:src="@drawable/ic_arrow"
+                android:layout_weight="10"
+                android:tint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 

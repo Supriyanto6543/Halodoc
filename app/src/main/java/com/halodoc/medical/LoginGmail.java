@@ -104,7 +104,7 @@ public class LoginGmail extends AppCompatActivity {
     }
 
     private void loggedNews(GoogleSignInAccount signInAccount){
-        Intent intent = new Intent(getApplicationContext(), ProfileUser.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.putExtra(GOOGLE_ACCOUNT, signInAccount);
         startActivity(intent);
         finish();
