@@ -157,6 +157,43 @@
                             android:layout_height="wrap_content">
 
                             <TextView
+                                android:text="@string/doctor"
+                                android:textSize="19dp"
+                                android:textColor="@color/black"
+                                android:layout_weight="60"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"/>
+
+                            <TextView
+                                android:id="@+id/doctor"
+                                android:text="@string/lihat"
+                                android:textSize="19dp"
+                                android:textColor="@color/red"
+                                android:gravity="right"
+                                android:layout_weight="40"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="10dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="20dp"
+                        android:padding="10dp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
                                 android:text="@string/kami"
                                 android:textSize="19dp"
                                 android:textColor="@color/black"

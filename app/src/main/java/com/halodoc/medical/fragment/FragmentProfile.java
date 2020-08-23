@@ -58,20 +58,14 @@ public class FragmentProfile extends Fragment {
         imageView = view.findViewById(R.id.image);
         name = view.findViewById(R.id.name);
         email = view.findViewById(R.id.email);
-        Picasso.get().load(Objects.requireNonNull(googleSignIn).getPhotoUrl()).into(imageView);
-        Log.d("jujuk", googleSignIn.getPhotoUrl() + googleSignIn.getDisplayName() + googleSignIn.getEmail());
-        name.setText(googleSignIn.getDisplayName());
-        email.setText(googleSignIn.getEmail());
-
-        login = view.findViewById(R.id.login);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), LoginGmail.class));
-            }
-        });
-
+        try{
+            Picasso.get().load(Objects.requireNonNull(googleSignIn).getPhotoUrl()).into(imageView);
+            Log.d("jujuk", googleSignIn.getPhotoUrl() + googleSignIn.getDisplayName() + googleSignIn.getEmail());
+            name.setText(googleSignIn.getDisplayName());
+            email.setText(googleSignIn.getEmail());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         return view;
     }

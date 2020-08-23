@@ -24,13 +24,15 @@
         <activity android:name=".ActivityDokter"/>
         <activity android:name=".ActivityCategoryAll"/>
         <activity android:name=".ActivityDokterDetail"/>
-        <activity android:name=".ActivityChat"/>
         <activity android:name=".ActivityDetailTag"/>
         <activity android:name=".ActivityPengaturan"/>
         <activity android:name=".ActivityProfileLengkap"/>
         <activity android:name=".ActivityDompet"/>
         <activity android:name=".ActivityLangganan"/>
         <activity android:name=".ActivityBantuan"/>
+        <activity android:name=".ActivityChats"/>
+        <activity android:name=".ChatEspecifico"/>
+        <activity android:name=".ChatGrupal"/>
         <activity android:name=".Register"/>
         <activity android:name=".LoginVerify"/>
         <activity android:name=".ProfileUser"/>

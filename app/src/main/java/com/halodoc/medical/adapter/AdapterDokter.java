@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.halodoc.medical.ActivityChat;
+import com.halodoc.medical.ActivityChats;
 import com.halodoc.medical.ActivityDokterDetail;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.DokterModal;
@@ -50,7 +50,7 @@ public class AdapterDokter extends RecyclerView.Adapter<AdapterDokter.MyDokter> 
         ((MyDokter) holder).button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ActivityChat.class);
+                Intent intent = new Intent(context, ActivityChats.class);
                 context.startActivity(intent);
             }
         });

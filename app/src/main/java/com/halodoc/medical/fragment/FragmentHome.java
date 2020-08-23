@@ -3,7 +3,6 @@ package com.halodoc.medical.fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.CompositePageTransformer;
-import androidx.viewpager2.widget.MarginPageTransformer;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,11 +24,11 @@ import com.android.volley.toolbox.Volley;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.halodoc.medical.ActivityCategoryAll;
+import com.halodoc.medical.ActivityChats;
 import com.halodoc.medical.R;
 import com.halodoc.medical.adapter.AdapterCategory;
 import com.halodoc.medical.adapter.AdapterNews;
 import com.halodoc.medical.adapter.AdapterSlider;
-import com.halodoc.medical.adapter.AdapterTag;
 import com.halodoc.medical.constant.Constants;
 import com.halodoc.medical.modal.CategoryModal;
 import com.halodoc.medical.modal.ProductModal;
@@ -61,7 +56,7 @@ public class FragmentHome extends Fragment {
     TextView lihat_semua;
     FirebaseUser fu;
     FirebaseAuth auth;
-    TextView email;
+    TextView email, doctor;
     SliderView imageSlider;
     RequestQueue queue;
 
@@ -76,6 +71,7 @@ public class FragmentHome extends Fragment {
         initsCategory(view);
         initsNews(view);
         imageSlider = view.findViewById(R.id.imageSlider);
+        doctor = view.findViewById(R.id.doctor);
         arrayList = new ArrayList<>();
         getSlider();
         imageSlider.setIndicatorAnimation(IndicatorAnimationType.WORM);
@@ -93,6 +89,13 @@ public class FragmentHome extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ActivityCategoryAll.class);
                 startActivity(intent);
+            }
+        });
+
+        doctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityChats.class));
             }
         });
 

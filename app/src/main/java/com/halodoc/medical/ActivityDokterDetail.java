@@ -26,7 +26,7 @@ public class ActivityDokterDetail extends AppCompatActivity {
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ActivityChat.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityChats.class);
                 startActivity(intent);
             }
         });
