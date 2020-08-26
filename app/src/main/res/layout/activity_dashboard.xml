@@ -127,10 +127,10 @@
                             android:id="@+id/imageSlider"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            app:sliderAnimationDuration="600"
+                            app:sliderAnimationDuration="400"
                             app:sliderAutoCycleDirection="back_and_forth"
                             app:sliderAutoCycleEnabled="true"
-                            app:sliderIndicatorAnimationDuration="600"
+                            app:sliderIndicatorAnimationDuration="400"
                             app:sliderIndicatorGravity="center_horizontal|bottom"
                             app:sliderIndicatorMargin="15dp"
                             app:sliderIndicatorOrientation="horizontal"
@@ -151,6 +151,7 @@
                         android:layout_height="wrap_content">
 
                         <LinearLayout
+                            android:id="@+id/ll_tv"
                             android:orientation="horizontal"
                             android:weightSum="100"
                             android:layout_width="match_parent"
@@ -178,9 +179,42 @@
 
                         </LinearLayout>
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_doctor"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <LinearLayout
+                            android:id="@+id/ll_login"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:gravity="center_horizontal"
+                                android:textSize="20dp"
+                                android:textColor="@color/black"
+                                android:text="Login to See More Doctor"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                            <Button
+                                android:id="@+id/btn_login"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/customize_button"
+                                android:textColor="@color/white"
+                                android:text="LOGIN NOW"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
+                        android:visibility="gone"
                         android:layout_marginTop="20dp"
                         android:padding="10dp"
                         android:orientation="vertical"

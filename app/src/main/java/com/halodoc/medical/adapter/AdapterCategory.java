@@ -42,7 +42,6 @@ public class AdapterCategory extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         Picasso.get().load(categoryModals.get(position).getImage()).into(((MyAdapter) holder).image);
-        Log.d("abus", categoryModals.get(position).getImage());
         ((MyAdapter) holder).title.setText(categoryModals.get(position).getTitle());
         ((MyAdapter) holder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override

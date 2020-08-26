@@ -7,11 +7,13 @@ public class Usuario implements Serializable {
     private String usuario;
     private String contrasena;
     private String nombre;
+    private String image;
 
-    public Usuario(String usuario, String contrasena, String nombre) {
+    public Usuario(String usuario, String contrasena, String nombre, String image) {
         this.usuario = usuario;
         this.contrasena = contrasena;
         this.nombre = nombre;
+        this.image = image;
     }
 
     public String getUsuario() {
@@ -36,5 +38,13 @@ public class Usuario implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -7,26 +7,28 @@
     tools:context=".ChatEspecifico">
 
     <LinearLayout
-        android:id="@+id/constraintLayout2"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btnRecargar"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginBottom="0dp"
-            android:text="Recargar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimaryDark"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMensajes"
+            android:layout_marginBottom="?attr/actionBarSize"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
@@ -39,47 +41,74 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:weightSum="100"
-                android:gravity="center_horizontal|center_vertical"
-                android:layout_alignParentBottom="true"
-                android:padding="5dp"
+            <androidx.cardview.widget.CardView
+                android:elevation="5dp"
+                app:cardMaxElevation="5dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
 
-                <EditText
-                    android:id="@+id/etTexto"
-                    android:background="@drawable/custom_edt"
-                    android:padding="10dp"
-                    android:layout_weight="80"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Ngobrol"/>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical"
+                    android:weightSum="100"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/btnEnviar"
-                    android:background="@color/white"
-                    android:layout_weight="20"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="Kirim" />
+                    <EditText
+                        android:id="@+id/etTexto"
+                        android:hint="Comment here ..."
+                        android:paddingTop="4dp"
+                        android:paddingBottom="8dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="10dp"
+                        android:layout_weight="80"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/custom_edt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                <ImageView
-                    android:id="@+id/refresh"
-                    android:src="@drawable/ic_refresh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    <RelativeLayout
+                        android:layout_weight="5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
 
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/refresh"
+                            android:src="@drawable/ic_refresh"
+                            android:layout_marginStart="9dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"/>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="15"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/btnEnviar"
+                            android:text="KIRIM"
+                            android:padding="1dp"
+                            android:background="@drawable/custom_edt"
+                            android:textSize="12dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvMensajes"
-            android:layout_marginBottom="?attr/actionBarSize"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
     </RelativeLayout>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

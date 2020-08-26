@@ -44,7 +44,6 @@ public class AdapterSlider extends SliderViewAdapter<AdapterSlider.SliderAdapter
     @Override
     public void onBindViewHolder(AdapterSlider.SliderAdapterVH viewHolder, int position) {
         Picasso.get().load(sliderModals.get(position).getImage()).into(((SliderAdapterVH) viewHolder).image);
-        Log.d("PHOTO", sliderModals.get(position).getImage());
     }
 
     @Override

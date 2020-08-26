@@ -8,12 +8,15 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +28,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.halodoc.medical.adapter.AdapterMensajes;
 import com.halodoc.medical.constant.Constants;
 import com.halodoc.medical.modal.Mensaje;
@@ -40,7 +47,6 @@ import java.util.Map;
 public class ChatEspecifico extends AppCompatActivity {
 
     Usuario usuario;
-    Usuario usuarioDestino;
     ArrayList<Mensaje> listaMensajes = new ArrayList<Mensaje>();
     RecyclerView rvMensajes;
     EditText etTexto;
@@ -52,18 +58,29 @@ public class ChatEspecifico extends AppCompatActivity {
     LinearLayoutManagerWrapper wrapper;
     CustomLinearLayoutManager cllm;
     ImageView refresh;
+    GoogleSignInAccount googleSignIn;
+    GoogleSignInClient googleSignInClient;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_especifico);
 
-        usuario = (Usuario) getIntent().getExtras().getSerializable("usuarios");
-        usuarioDestino = (Usuario) getIntent().getExtras().getSerializable("usuariosdes");
-        getSupportActionBar().setTitle(usuario.getNombre());
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Pesan");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getResources().getString(R.string.client_google))
+                .requestEmail()
+                .build();
+
+        googleSignIn = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), googleSignInOptions);
         intent = new Intent(this, ServiceChat.class);
-
         s_usuario = getIntent().getStringExtra("usuario");
         s_usuarioDestino = getIntent().getStringExtra("usuarioDestino");
 
@@ -84,7 +101,7 @@ public class ChatEspecifico extends AppCompatActivity {
                 if(detact_edt.isEmpty()) {
                     Toast.makeText(ChatEspecifico.this, "Pesan tidak boleh kosong", Toast.LENGTH_LONG).show();
                 } else {
-                    enviarMensaje();
+                    enviarMensaje(detact_edt);
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -103,7 +120,7 @@ public class ChatEspecifico extends AppCompatActivity {
         });
     }
 
-    public void enviarMensaje() {
+    public void enviarMensaje(final String s) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_ENVIAR_MENSAJE,
                 new Response.Listener<String>() {
                     @Override
@@ -114,15 +131,15 @@ public class ChatEspecifico extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("SUPRIS", error.getMessage());
+                error.getMessage();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new Hashtable<String, String>();
-                parametros.put("usuario", usuario.getUsuario());
-                parametros.put("usuarioDestino", usuarioDestino.getUsuario());
-                parametros.put("mensaje", etTexto.getText().toString());
+                parametros.put("usuario", googleSignIn.getDisplayName());
+                parametros.put("usuarioDestino", s_usuarioDestino);
+                parametros.put("mensaje", s);
                 return parametros;
             }
         };
@@ -133,8 +150,7 @@ public class ChatEspecifico extends AppCompatActivity {
 
     public void obtenerMensajes() {
         listaMensajes.clear();
-        Log.d("MAKAN", Constants.URL_OBTENER_MENSAJES+Constants.USUARIO +"s"+ Constants.USUARIODESTINO+s_usuario);
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_OBTENER_MENSAJES+Constants.USUARIO +"s"+ Constants.USUARIODESTINO+s_usuario, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_OBTENER_MENSAJES+Constants.UNIQUE_ID +googleSignIn.getDisplayName()+ Constants.USUARIODESTINO+s_usuarioDestino, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -160,20 +176,20 @@ public class ChatEspecifico extends AppCompatActivity {
                     rvMensajes.setAdapter(adaptador);
 
                 } catch (JSONException e) {
-                    Log.d("MAKANN", e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("TESTINGKU", error.getMessage());
+                error.getMessage();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new Hashtable<String, String>();
-                parametros.put("usuario", usuario.getUsuario());
-                parametros.put("usuarioDestino", usuarioDestino.getUsuario());
+                parametros.put("usuario", s_usuario);
+                parametros.put("usuarioDestino", s_usuarioDestino);
 
                 return parametros;
             }
@@ -185,7 +201,7 @@ public class ChatEspecifico extends AppCompatActivity {
 
     public void chatRefresh() {
         listaMensajes.clear();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_OBTENER_MENSAJES+Constants.USUARIO +"s"+ Constants.USUARIODESTINO+s_usuario, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_OBTENER_MENSAJES+Constants.UNIQUE_ID +googleSignIn.getDisplayName()+ Constants.USUARIODESTINO+s_usuarioDestino, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -211,13 +227,13 @@ public class ChatEspecifico extends AppCompatActivity {
                     rvMensajes.setAdapter(adaptador);
 
                 } catch (JSONException e) {
-                    Log.d("MAKANN", e.getMessage());
+                    e.printStackTrace();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("TESTINGKU", error.getMessage());
+                error.getMessage();
             }
         });
 
@@ -234,6 +250,21 @@ public class ChatEspecifico extends AppCompatActivity {
             adaptador.notifyItemRangeInserted(0, listaMensajes.size());*/
         }
     };
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onResume() {

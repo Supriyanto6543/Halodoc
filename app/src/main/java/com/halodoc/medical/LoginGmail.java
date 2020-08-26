@@ -171,4 +171,10 @@ public class LoginGmail extends AppCompatActivity {
         });
         queue.add(request);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+    }
 }

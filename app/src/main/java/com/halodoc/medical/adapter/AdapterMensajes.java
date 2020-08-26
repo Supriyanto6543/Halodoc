@@ -1,8 +1,10 @@
 package com.halodoc.medical.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,17 +48,17 @@ public class AdapterMensajes extends RecyclerView.Adapter<AdapterMensajes.ViewHo
             viewHolderMensajes.tvDate.setVisibility(View.VISIBLE);
         }
 
-        if(usuario.getUsuario().equals(listaMensajes.get(i).getUsuarioOrigen())) {
-            viewHolderMensajes.root.setGravity(Gravity.RIGHT);
-            viewHolderMensajes.tvNombreUsuario.setGravity(Gravity.RIGHT);
-            viewHolderMensajes.tvMensaje.setGravity(Gravity.RIGHT);
+        if(viewHolderMensajes.s_usuarioDestino.equals(listaMensajes.get(i).getUsuarioOrigen())) {
+            viewHolderMensajes.root.setGravity(Gravity.LEFT);
+            viewHolderMensajes.tvNombreUsuario.setGravity(Gravity.LEFT);
+            viewHolderMensajes.tvMensaje.setGravity(Gravity.LEFT);
             viewHolderMensajes.tvNombreUsuario.setTextColor(Color.BLUE);
             viewHolderMensajes.tvNombreUsuario.setText(listaMensajes.get(i).getUsuarioOrigen());
             viewHolderMensajes.tvMensaje.setText(listaMensajes.get(i).getMensaje());
             viewHolderMensajes.tvDate.setText(listaMensajes.get(i).getChatDate());
         } else {
-            viewHolderMensajes.root.setGravity(Gravity.LEFT);
-            viewHolderMensajes.tvNombreUsuario.setGravity(Gravity.LEFT);
+            viewHolderMensajes.root.setGravity(Gravity.RIGHT);
+            viewHolderMensajes.tvNombreUsuario.setGravity(Gravity.RIGHT);
             viewHolderMensajes.tvMensaje.setGravity(Gravity.LEFT);
             viewHolderMensajes.tvNombreUsuario.setTextColor(Color.RED);
             viewHolderMensajes.tvNombreUsuario.setText(listaMensajes.get(i).getUsuarioOrigen());
@@ -74,10 +76,12 @@ public class AdapterMensajes extends RecyclerView.Adapter<AdapterMensajes.ViewHo
 
         TextView tvNombreUsuario, tvMensaje, tvDate;
         LinearLayout root;
+        String s_usuarioDestino;
 
         public ViewHolderMensajes(@NonNull View itemView) {
             super(itemView);
 
+            s_usuarioDestino = ((Activity) contexto).getIntent().getStringExtra("usuarioDestino");
             root = itemView.findViewById(R.id.root);
             tvNombreUsuario = itemView.findViewById(R.id.tvNombreUsuario);
             tvMensaje = itemView.findViewById(R.id.tvMensaje);

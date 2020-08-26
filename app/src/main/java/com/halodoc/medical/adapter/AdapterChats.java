@@ -2,9 +2,11 @@ package com.halodoc.medical.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +14,8 @@ import com.halodoc.medical.ChatEspecifico;
 import com.halodoc.medical.ChatGrupal;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.Usuario;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderChats> {
@@ -29,28 +33,25 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
     @NonNull
     @Override
     public AdapterChats.ViewHolderChats onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_rv_chats, null, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_dokter, null, false);
         return new ViewHolderChats(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull AdapterChats.ViewHolderChats viewHolderChats, final int i) {
-        viewHolderChats.tvChatUsuario.setText(listaUsuarios.get(i).getNombre());
+        viewHolderChats.name.setText(listaUsuarios.get(i).getNombre());
+        Picasso.get().load(listaUsuarios.get(i).getImage()).into(viewHolderChats.image);
 
-        viewHolderChats.tvChatUsuario.setOnClickListener(new View.OnClickListener() {
+        viewHolderChats.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(listaUsuarios.get(i).getNombre().equals("TODOS")) {
-                    //Toast.makeText(v.getContext(), "CHAT GRUPAL", Toast.LENGTH_LONG).show();
+                if(listaUsuarios.get(i).getNombre().equals("GROUP")) {
                     Intent intent = new Intent(v.getContext(), ChatGrupal.class);
                     intent.putExtra("usuario", usuario);
                     contexto.startActivity(intent);
                 } else {
-                    //Toast.makeText(v.getContext(), usuario.getNombre()+" , "+listaUsuarios.get(i).getNombre(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(v.getContext(), ChatEspecifico.class);
-                    intent.putExtra("usuarios", usuario);
-                    intent.putExtra("usuariosdes", listaUsuarios.get(i));
                     intent.putExtra("usuario", listaUsuarios.get(i).getUsuario());
                     intent.putExtra("usuarioDestino", listaUsuarios.get(i).getNombre());
                     contexto.startActivity(intent);
@@ -66,12 +67,13 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
 
     public class ViewHolderChats extends RecyclerView.ViewHolder {
 
-        TextView tvChatUsuario;
+        TextView name;
+        ImageView image;
 
         public ViewHolderChats(@NonNull View itemView) {
             super(itemView);
-
-            tvChatUsuario = itemView.findViewById(R.id.tvChatUsuario);
+            name = itemView.findViewById(R.id.title);
+            image = itemView.findViewById(R.id.image);
         }
     }
 }

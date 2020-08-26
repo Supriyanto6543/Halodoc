@@ -1,7 +1,11 @@
 package com.halodoc.medical;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.halodoc.medical.adapter.AdapterChats;
 import com.halodoc.medical.constant.Constants;
 import com.halodoc.medical.modal.Usuario;
@@ -29,10 +37,11 @@ public class ActivityChats extends AppCompatActivity {
 
     ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
     RecyclerView rvChats;
-
     Usuario usuario;
     String myName;
     Toolbar toolbar;
+    GoogleSignInAccount googleSignIn;
+    GoogleSignInClient googleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,27 +49,40 @@ public class ActivityChats extends AppCompatActivity {
         setContentView(R.layout.activity_chats);
 
         toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Detail Profile");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getResources().getString(R.string.client_google))
+                .requestEmail()
+                .build();
+
+        googleSignIn = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), googleSignInOptions);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Chat Dokter");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-//        usuario = (Usuario) getIntent().getExtras().getSerializable("usuario");
-//        getSupportActionBar().setTitle(usuario.getNombre());
-//        myName = usuario.getUsuario();
-//
         rvChats = findViewById(R.id.rvChats);
         rvChats.setLayoutManager(new GridLayoutManager(getApplicationContext(), 1));
 //
-        obtenerChats();
+        if (googleSignIn != null){
+            obtenerChats();
+        }else{
+            startActivity(new Intent(getApplicationContext(), LoginGmail.class));
+        }
 
     }
 
     public void obtenerChats() {
         listaUsuarios.clear();
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_USUARIOS + "?usuario=s", null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_USUARIOS + Constants.UNIQUE_ID + googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try{
@@ -69,10 +91,11 @@ public class ActivityChats extends AppCompatActivity {
                     for(int i = 0 ; i < jsonArray.length() ; i++) {
                         JSONObject objeto = jsonArray.getJSONObject(i);
 
-                        Usuario usuario = new Usuario(
-                                objeto.getString("usuario"),
-                                objeto.getString("contrasena"),
-                                objeto.getString("nombre")
+                        usuario = new Usuario(
+                                objeto.getString("unique_id"),
+                                objeto.getString("email"),
+                                objeto.getString("username"),
+                                objeto.getString("photo")
                         );
 
                         listaUsuarios.add(usuario);
@@ -89,7 +112,7 @@ public class ActivityChats extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("SUPRI", error.getMessage());
+                error.getMessage();
             }
         }){
             @Override
@@ -102,5 +125,20 @@ public class ActivityChats extends AppCompatActivity {
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

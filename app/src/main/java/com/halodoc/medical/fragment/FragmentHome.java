@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,18 +17,25 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.halodoc.medical.ActivityCategoryAll;
 import com.halodoc.medical.ActivityChats;
+import com.halodoc.medical.LoginGmail;
 import com.halodoc.medical.R;
 import com.halodoc.medical.adapter.AdapterCategory;
+import com.halodoc.medical.adapter.AdapterChats;
 import com.halodoc.medical.adapter.AdapterNews;
 import com.halodoc.medical.adapter.AdapterSlider;
 import com.halodoc.medical.constant.Constants;
@@ -34,18 +43,24 @@ import com.halodoc.medical.modal.CategoryModal;
 import com.halodoc.medical.modal.ProductModal;
 import com.halodoc.medical.modal.SliderModal;
 import com.halodoc.medical.modal.TagModal;
+import com.halodoc.medical.modal.Usuario;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class FragmentHome extends Fragment {
 
-    RecyclerView recyclerView, recyclerView0, recyclerView1;
+    ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+    Usuario usuario;
+    RecyclerView recyclerView, rv_doctor, recyclerView1;
     AdapterCategory adapterCategory;
     AdapterNews adapterNews;
     ArrayList<CategoryModal> cm;
@@ -59,6 +74,10 @@ public class FragmentHome extends Fragment {
     TextView email, doctor;
     SliderView imageSlider;
     RequestQueue queue;
+    GoogleSignInAccount googleSignIn;
+    GoogleSignInClient googleSignInClient;
+    LinearLayout ll_login, ll_tv;
+    Button btn_login;
 
     @Nullable
     @Override
@@ -68,8 +87,20 @@ public class FragmentHome extends Fragment {
         queue = Volley.newRequestQueue(getActivity());
         auth = FirebaseAuth.getInstance();
 
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getResources().getString(R.string.client_google))
+                .requestEmail()
+                .build();
+
+        googleSignIn = GoogleSignIn.getLastSignedInAccount(getActivity());
+        googleSignInClient = GoogleSignIn.getClient(getActivity(), googleSignInOptions);
+
         initsCategory(view);
         initsNews(view);
+
+        ll_tv = view.findViewById(R.id.ll_tv);
+        ll_login = view.findViewById(R.id.ll_login);
+        btn_login = view.findViewById(R.id.btn_login);
         imageSlider = view.findViewById(R.id.imageSlider);
         doctor = view.findViewById(R.id.doctor);
         arrayList = new ArrayList<>();
@@ -82,8 +113,12 @@ public class FragmentHome extends Fragment {
         imageSlider.setScrollTimeInSec(4); //set scroll delay in seconds :
         imageSlider.startAutoCycle();
 
+        rv_doctor = view.findViewById(R.id.rv_doctor);
         lihat_semua = view.findViewById(R.id.lihat_semua);
         email = view.findViewById(R.id.email);
+
+        rv_doctor.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+
         lihat_semua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +134,27 @@ public class FragmentHome extends Fragment {
             }
         });
 
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), LoginGmail.class));
+                Log.d("MAIL", "MAIL");
+            }
+        });
+
         fu = auth.getCurrentUser();
         getProduct();
+
+        if (googleSignIn != null){
+            ll_tv.setVisibility(View.VISIBLE);
+            rv_doctor.setVisibility(View.VISIBLE);
+            ll_login.setVisibility(View.GONE);
+            obtenerChats();
+        }else{
+            ll_tv.setVisibility(View.GONE);
+            rv_doctor.setVisibility(View.GONE);
+            ll_login.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -144,7 +198,7 @@ public class FragmentHome extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("KOM", error.getMessage());
+                error.getMessage();
             }
         });
         queue.add(jsonObjectRequest);
@@ -179,10 +233,56 @@ public class FragmentHome extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("KOM", error.getMessage());
+                error.getMessage();
             }
         });
         queue.add(jsonObjectRequest);
+    }
+
+    public void obtenerChats() {
+        listaUsuarios.clear();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_DOKTER_HOME + Constants.UNIQUE_ID + googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    JSONArray jsonArray = response.getJSONArray("usuarios");
+
+                    for(int i = 0 ; i < jsonArray.length() ; i++) {
+                        JSONObject objeto = jsonArray.getJSONObject(i);
+
+                        usuario = new Usuario(
+                                objeto.getString("unique_id"),
+                                objeto.getString("email"),
+                                objeto.getString("username"),
+                                objeto.getString("photo")
+                        );
+
+                        listaUsuarios.add(usuario);
+                    }
+
+                    AdapterChats adaptador = new AdapterChats(getActivity(), usuario, listaUsuarios);
+                    rv_doctor.setAdapter(adaptador);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.getMessage();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parametros = new Hashtable<String, String>();
+                parametros.put("usuario", usuario.getUsuario().toString());
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+        requestQueue.add(request);
     }
 
     private void getProduct(){
