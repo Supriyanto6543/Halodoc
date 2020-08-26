@@ -37,6 +37,7 @@
         <activity android:name=".LoginVerify"/>
         <activity android:name=".ProfileUser"/>
         <activity android:name=".ActivityDetailProduct"/>
+        <activity android:name=".ActivityCart"/>
     </application>
 
 </manifest>

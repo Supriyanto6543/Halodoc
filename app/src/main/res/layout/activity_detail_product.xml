@@ -138,6 +138,7 @@
                 android:layout_height="match_parent"/>
 
             <RelativeLayout
+                android:id="@+id/rl_cart"
                 android:layout_weight="10"
                 android:paddingStart="5dp"
                 android:paddingEnd="5dp"

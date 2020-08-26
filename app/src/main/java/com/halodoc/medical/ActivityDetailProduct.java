@@ -1,5 +1,6 @@
 package com.halodoc.medical;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -7,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ public class ActivityDetailProduct extends AppCompatActivity {
     AdapterNews adapterNews;
     ArrayList<ProductModal> productModals;
     RequestQueue queue;
+    RelativeLayout rl_cart;
     WebView webView;
     TextView title, tv_qty, count;
     ImageView image, add, remove;
@@ -54,6 +57,7 @@ public class ActivityDetailProduct extends AppCompatActivity {
 
         id_product = getIntent().getIntExtra("id_product", 0);
 
+        rl_cart = findViewById(R.id.rl_cart);
         count = findViewById(R.id.count);
         add = findViewById(R.id.add);
         remove = findViewById(R.id.remove);
@@ -69,6 +73,16 @@ public class ActivityDetailProduct extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         getProduct(title, image, webView, id_product);
+
+        rl_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                id_product = getIntent().getIntExtra("id_product", 0);
+                Intent intent = new Intent(ActivityDetailProduct.this, ActivityCart.class);
+                intent.putExtra("id_product", id_product);
+                startActivity(intent);
+            }
+        });
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override

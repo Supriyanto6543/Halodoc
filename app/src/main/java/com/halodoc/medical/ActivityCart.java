@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 public class ActivityCart extends AppCompatActivity {
 
     Toolbar toolbar;
+    int id_product;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,10 +22,17 @@ public class ActivityCart extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
 
+        id_product = getIntent().getIntExtra("id_product", 0);
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Detail Product");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
+
+    private void sendCart(){
+
+    }
+
 }
