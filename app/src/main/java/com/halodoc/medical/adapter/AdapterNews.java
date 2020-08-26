@@ -1,7 +1,9 @@
 package com.halodoc.medical.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.halodoc.medical.ActivityDetailProduct;
 import com.halodoc.medical.R;
 import com.halodoc.medical.modal.ProductModal;
 import com.squareup.picasso.Picasso;
@@ -47,7 +50,10 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
         ((MyAdapter) holder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "DETAIL NEWS " + position + " DIKLIK", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, ActivityDetailProduct.class);
+                intent.putExtra("id_product", categoryModals.get(position).getId_product());
+                Log.d("MATUR", categoryModals.get(position).getId_product() + "");
+                context.startActivity(intent);
             }
         });
     }

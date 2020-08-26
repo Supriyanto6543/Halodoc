@@ -25,10 +25,12 @@ public class Constants {
     public static final String JSON_ROOT = "HALODOC";
     public static final String API = "api.php?";
 
+    public static final String PRODUCT_FIELD_DETAIL = "detail_product=";
     public static final String PRODUCT_FIELD = "product";
     public static final String NEWS_FIELD = "news";
     public static final String CATEGORY_FIELD = "category";
 
+    public static final String PRODUCT_DETAIL = ROOT + API + PRODUCT_FIELD_DETAIL;
     public static final String PRODUCT = ROOT + API + PRODUCT_FIELD;
     public static final String NEWS = ROOT + API + NEWS_FIELD;
     public static final String CATEGORY = ROOT + API + CATEGORY_FIELD;
