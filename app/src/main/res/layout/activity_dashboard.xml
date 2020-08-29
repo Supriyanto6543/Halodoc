@@ -29,7 +29,7 @@
 
                     <LinearLayout
                         android:orientation="vertical"
-                        android:layout_weight="100"
+                        android:layout_weight="50"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">
 
@@ -56,8 +56,8 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_cart"
                         android:orientation="vertical"
-                        android:visibility="gone"
                         android:layout_weight="50"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content">

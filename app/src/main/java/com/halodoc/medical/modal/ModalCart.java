@@ -15,8 +15,9 @@ public class ModalCart implements Serializable {
     private String title;
     private String amount;
     private String image;
+    private String qty;
 
-    public ModalCart(String id_cart, String id_user_cart, String id_product_cart, String date_cart, String title, String amount, String image) {
+    public ModalCart(String id_cart, String id_user_cart, String id_product_cart, String date_cart, String title, String amount, String image, String qty) {
         this.id_cart = id_cart;
         this.id_user_cart = id_user_cart;
         this.id_product_cart = id_product_cart;
@@ -24,6 +25,7 @@ public class ModalCart implements Serializable {
         this.title = title;
         this.amount = amount;
         this.image = image;
+        this.qty = qty;
     }
 
     public String getId_cart() {
@@ -80,5 +82,13 @@ public class ModalCart implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
     }
 }

@@ -16,12 +16,18 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.halodoc.medical.adapter.AdapterNews;
 import com.halodoc.medical.constant.Constants;
 import com.halodoc.medical.modal.ProductModal;
@@ -31,6 +37,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Supriyanto on 8/26/2020.
@@ -47,6 +55,9 @@ public class ActivityDetailProduct extends AppCompatActivity {
     TextView title, tv_qty, count;
     ImageView image, add, remove;
     int id_product, qty = 1;
+    GoogleSignInAccount googleSignIn;
+    GoogleSignInClient googleSignInClient;
+    String countQty;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +65,13 @@ public class ActivityDetailProduct extends AppCompatActivity {
         setContentView(R.layout.activity_detail_product);
 
         queue = Volley.newRequestQueue(getApplicationContext());
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getResources().getString(R.string.client_google))
+                .requestEmail()
+                .build();
+
+        googleSignIn = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), googleSignInOptions);
 
         id_product = getIntent().getIntExtra("id_product", 0);
 
@@ -78,7 +96,11 @@ public class ActivityDetailProduct extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 id_product = getIntent().getIntExtra("id_product", 0);
+                countQty = tv_qty.getText().toString();
+                Log.d("HAUL", countQty);
+                sendCart();
                 Intent intent = new Intent(ActivityDetailProduct.this, ActivityCart.class);
+                intent.putExtra("qty", countQty);
                 intent.putExtra("id_product", id_product);
                 startActivity(intent);
             }
@@ -116,8 +138,32 @@ public class ActivityDetailProduct extends AppCompatActivity {
 
     }
 
+    private void sendCart(){
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_INSERT_CART+Constants.ID_USER_CART+googleSignIn.getId()+Constants.ID_PRODUCT_CART+id_product+Constants.QTY+countQty, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("BINGUNG", response + "");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("WONGS", error.getMessage() + "");
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("id_user_cart", String.valueOf(googleSignIn.getId()));
+                map.put("id_product_cart", String.valueOf(id_product));
+                map.put("qty", countQty);
+                return map;
+            }
+        };
+
+        queue.add(request);
+    }
+
     private void getProduct(final TextView title, final ImageView imageView, final WebView webView, int id){
-        Log.d("ANWAR", Constants.PRODUCT_DETAIL+id);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.PRODUCT_DETAIL+id, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

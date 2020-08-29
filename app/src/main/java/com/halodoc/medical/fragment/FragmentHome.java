@@ -30,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.halodoc.medical.ActivityCart;
 import com.halodoc.medical.ActivityCategoryAll;
 import com.halodoc.medical.ActivityChats;
 import com.halodoc.medical.LoginGmail;
@@ -76,7 +77,7 @@ public class FragmentHome extends Fragment {
     RequestQueue queue;
     GoogleSignInAccount googleSignIn;
     GoogleSignInClient googleSignInClient;
-    LinearLayout ll_login, ll_tv;
+    LinearLayout ll_login, ll_tv, ll_cart;
     Button btn_login;
 
     @Nullable
@@ -98,6 +99,7 @@ public class FragmentHome extends Fragment {
         initsCategory(view);
         initsNews(view);
 
+        ll_cart = view.findViewById(R.id.ll_cart);
         ll_tv = view.findViewById(R.id.ll_tv);
         ll_login = view.findViewById(R.id.ll_login);
         btn_login = view.findViewById(R.id.btn_login);
@@ -118,6 +120,13 @@ public class FragmentHome extends Fragment {
         email = view.findViewById(R.id.email);
 
         rv_doctor.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+
+        ll_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityCart.class));
+            }
+        });
 
         lihat_semua.setOnClickListener(new View.OnClickListener() {
             @Override

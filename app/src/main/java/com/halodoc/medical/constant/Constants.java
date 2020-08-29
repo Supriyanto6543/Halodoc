@@ -13,6 +13,7 @@ public class Constants {
     public static String URL_ENVIAR_MENSAJE_GRUPAL = ROOT_URL + "insertarMensajeGrupal.php";
     public static String URL_OBTENER_MENSAJES = ROOT_URL + "obtenerMensajes.php";
     public static String URL_OBTENER_MENSAJES_GRUPAL = ROOT_URL + "obtenerMensajesGrupales.php";
+    public static String URL_INSERT_CART = ROOT_URL + "insertcart.php";
 
     public static String UNIQUE_ID = "?unique_id=";
     public static String USUARIODESTINO = "&usuarioDestino=";
@@ -24,9 +25,14 @@ public class Constants {
 
     public static final String JSON_ROOT = "HALODOC";
     public static final String API = "api.php?";
+    public static final String CART_FIELD = "cart=";
+    public static final String ID_USER_CART = "?id_user_cart=";
+    public static final String ID_PRODUCT_CART = "&id_product_cart=";
+    public static final String QTY = "&qty=";
 
     public static final String PRODUCT_FIELD_DETAIL = "detail_product=";
     public static final String PRODUCT_FIELD = "product";
+    public static final String PRODUCT_CARTS = "cart";
     public static final String NEWS_FIELD = "news";
     public static final String CATEGORY_FIELD = "category";
 
@@ -34,6 +40,7 @@ public class Constants {
     public static final String PRODUCT = ROOT + API + PRODUCT_FIELD;
     public static final String NEWS = ROOT + API + NEWS_FIELD;
     public static final String CATEGORY = ROOT + API + CATEGORY_FIELD;
+    public static final String CART = ROOT + API + CART_FIELD;
 
     public static final String REGISTER = FIELD + "register.php";
     public static final String CHECK_LOGIN = FIELD + "check_login.php";
