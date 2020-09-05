@@ -4,8 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -29,6 +31,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.halodoc.medical.adapter.AdapterCart;
 import com.halodoc.medical.constant.Constants;
+import com.halodoc.medical.interfaces.DeleteCart;
 import com.halodoc.medical.modal.ModalCart;
 import com.squareup.picasso.Picasso;
 
@@ -51,6 +54,7 @@ public class ActivityCart extends AppCompatActivity {
     RequestQueue queue;
     AdapterCart adapterCart;
     ArrayList<ModalCart> modalCarts;
+    RelativeLayout checkout;
     ModalCart modalCart;
     RecyclerView rv_cart;
     GoogleSignInAccount googleSignIn;
@@ -62,6 +66,7 @@ public class ActivityCart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         toolbar = findViewById(R.id.toolbar);
+        checkout = findViewById(R.id.checkout);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getResources().getString(R.string.client_google))
@@ -83,6 +88,13 @@ public class ActivityCart extends AppCompatActivity {
         getSupportActionBar().setTitle("Detail Product");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         getProduct();
 
@@ -110,7 +122,12 @@ public class ActivityCart extends AppCompatActivity {
                         modalCart = new ModalCart(id, user_cart, id_product_cart, date_cart, name_product, discount, image_product, qty);
                         modalCarts.add(modalCart);
 
-                        adapterCart = new AdapterCart(getApplicationContext(), modalCarts);
+                        adapterCart = new AdapterCart(getApplicationContext(), modalCarts, new DeleteCart() {
+                            @Override
+                            public void cartDelete(String position) {
+                                deleteCart(position);
+                            }
+                        });
                         rv_cart.setAdapter(adapterCart);
                     }
 
@@ -128,6 +145,21 @@ public class ActivityCart extends AppCompatActivity {
         queue.add(jsonObjectRequest);
     }
 
+    private void deleteCart(String delete){
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.DELETE_CART+delete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("FAJAR", response + "");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("irfan", error.getMessage() + "");
+            }
+        });
+        queue.add(request);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -143,4 +175,9 @@ public class ActivityCart extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void recreate() {
+        super.recreate();
+        getProduct();
+    }
 }

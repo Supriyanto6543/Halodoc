@@ -12,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.halodoc.medical.R;
+import com.halodoc.medical.interfaces.DeleteCart;
 import com.halodoc.medical.modal.ModalCart;
 import com.squareup.picasso.Picasso;
 
+import java.security.PrivateKey;
 import java.util.ArrayList;
 
 /**
@@ -25,10 +27,12 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyCart> {
 
     private Context context;
     private ArrayList<ModalCart> modalCarts;
+    DeleteCart deleteCart;
 
-    public AdapterCart(Context context, ArrayList<ModalCart> modalCarts) {
+    public AdapterCart(Context context, ArrayList<ModalCart> modalCarts, DeleteCart deleteCart) {
         this.context = context;
         this.modalCarts = modalCarts;
+        this.deleteCart = deleteCart;
     }
 
     @NonNull
@@ -40,14 +44,14 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyCart> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterCart.MyCart holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterCart.MyCart holder, final int position) {
         holder.title.setText(modalCarts.get(position).getTitle());
         holder.price.setText(modalCarts.get(position).getAmount());
         Picasso.get().load(modalCarts.get(position).getImage()).into(holder.image);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("HORES", "ANWAR ZAHID CS");
+                deleteCart.cartDelete(modalCarts.get(position).getId_cart());
             }
         });
     }

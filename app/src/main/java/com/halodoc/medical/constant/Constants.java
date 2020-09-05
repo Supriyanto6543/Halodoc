@@ -6,7 +6,7 @@ package com.halodoc.medical.constant;
  */
 public class Constants {
 
-    public static String ROOT_URL = "http://192.168.2.53/halodoc/chat/";
+    public static String ROOT_URL = "http://192.168.2.26/halodoc/chat/";
     public static String URL_LOGIN = ROOT_URL + "login.php";
     public static String URL_USUARIOS = ROOT_URL + "listdokter.php";
     public static String URL_ENVIAR_MENSAJE = ROOT_URL + "insertarMensaje.php";
@@ -19,7 +19,7 @@ public class Constants {
     public static String USUARIODESTINO = "&usuarioDestino=";
 
     public static final String GOOGLE_ACCOUNT = "google_account";
-    public static final String ROOT = "http://192.168.2.53/halodoc/";
+    public static final String ROOT = "http://192.168.2.26/halodoc/";
     public static final String FIELD = ROOT + "field/";
     public static final String URL_DOKTER_HOME = ROOT + "api.php?dokter_home&";
 
@@ -33,6 +33,7 @@ public class Constants {
     public static final String PRODUCT_FIELD_DETAIL = "detail_product=";
     public static final String PRODUCT_FIELD = "product";
     public static final String PRODUCT_CARTS = "cart";
+    public static final String PRODUCT_DELETE_CARTS = "delete_cart=";
     public static final String NEWS_FIELD = "news";
     public static final String CATEGORY_FIELD = "category";
 
@@ -41,6 +42,7 @@ public class Constants {
     public static final String NEWS = ROOT + API + NEWS_FIELD;
     public static final String CATEGORY = ROOT + API + CATEGORY_FIELD;
     public static final String CART = ROOT + API + CART_FIELD;
+    public static final String DELETE_CART = ROOT + API + PRODUCT_DELETE_CARTS;
 
     public static final String REGISTER = FIELD + "register.php";
     public static final String CHECK_LOGIN = FIELD + "check_login.php";
