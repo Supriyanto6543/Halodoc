@@ -99,6 +99,7 @@ public class ActivityCart extends AppCompatActivity {
                     @Override
                     public void run() {
                         startActivity(new Intent(getApplicationContext(), ActivityTransfer.class));
+                        finish();
                     }
                 }, 1000);
             }
