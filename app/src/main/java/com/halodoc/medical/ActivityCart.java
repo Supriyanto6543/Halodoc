@@ -1,6 +1,9 @@
 package com.halodoc.medical;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -45,6 +48,16 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
+
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 /**
  * Created by Supriyanto on 8/26/2020.
@@ -95,13 +108,8 @@ public class ActivityCart extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startActivity(new Intent(getApplicationContext(), ActivityTransfer.class));
-                        finish();
-                    }
-                }, 1000);
+                SenderAgents senderAgents = new SenderAgents("mail", "subject", "message", getApplicationContext());
+                senderAgents.execute();
             }
         });
 
@@ -188,5 +196,71 @@ public class ActivityCart extends AppCompatActivity {
     public void recreate() {
         super.recreate();
         getProduct();
+    }
+
+    private static class SenderAgents extends AsyncTask<Void,Void, Void> {
+
+        private String mail;
+        private String subject;
+        private String message;
+
+        private Context context;
+        private Session session;
+
+        private ProgressDialog progressDialog;
+        RequestQueue queue;
+
+        public SenderAgents(String mail, String subject, String message, Context context) {
+            queue = Volley.newRequestQueue(context);
+            this.mail = mail;
+            this.subject = subject;
+            this.message = message;
+            this.context = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = ProgressDialog.show(context, "Please wait. . .", "", false);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Properties props = new Properties();
+
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.socketFactory.port", "465");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.port", "465");
+
+            session = Session.getDefaultInstance(props, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("supriyanto6543@gmail.com", "4kubocahsonggo123@");
+                }
+            });
+
+            try{
+
+                MimeMessage mimeMessage = new MimeMessage(session);
+                mimeMessage.setFrom(new InternetAddress("supriyanto6543@gmail.com"));
+                mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(mail));
+                mimeMessage.setSubject(subject);
+                mimeMessage.setText(String.valueOf(message));
+                Transport.send(mimeMessage);
+
+            }catch (MessagingException m){
+                m.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            progressDialog.dismiss();
+            context.startActivity(new Intent(context, ActivityTransfer.class));
+        }
     }
 }

@@ -2,13 +2,8 @@ package com.halodoc.medical.gmails;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-
-import com.power.render.FormSubscribe;
-
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -78,7 +73,6 @@ public class SenderAgent extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void aVoid) {
         progressDialog.dismiss();
-        context.startActivity(new Intent(context, FormSubscribe.class));
         //new CheckoutActivity().sendCart(context);
         //new CheckoutActivity().pushNotify(context);
     }
