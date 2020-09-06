@@ -1,11 +1,14 @@
 package com.halodoc.medical;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,7 +57,7 @@ public class ActivityCart extends AppCompatActivity {
     RequestQueue queue;
     AdapterCart adapterCart;
     ArrayList<ModalCart> modalCarts;
-    RelativeLayout checkout;
+    Button checkout;
     ModalCart modalCart;
     RecyclerView rv_cart;
     GoogleSignInAccount googleSignIn;
@@ -92,7 +95,12 @@ public class ActivityCart extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startActivity(new Intent(getApplicationContext(), ActivityTransfer.class));
+                    }
+                }, 1000);
             }
         });
 

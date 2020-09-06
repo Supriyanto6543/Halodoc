@@ -29,9 +29,12 @@ public class Constants {
     public static final String ID_USER_CART = "?id_user_cart=";
     public static final String ID_PRODUCT_CART = "&id_product_cart=";
     public static final String QTY = "&qty=";
+    public static final String BANK = ROOT + API + "bank";
 
     public static final String PRODUCT_FIELD_DETAIL = "detail_product=";
     public static final String PRODUCT_FIELD = "product";
+    public static final String BANK_FIELD = "bank";
+
     public static final String PRODUCT_CARTS = "cart";
     public static final String PRODUCT_DELETE_CARTS = "delete_cart=";
     public static final String NEWS_FIELD = "news";

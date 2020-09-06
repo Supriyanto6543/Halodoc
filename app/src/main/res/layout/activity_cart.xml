@@ -34,7 +34,6 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/checkout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -49,6 +48,7 @@
             android:layout_height="?attr/actionBarSize">
 
             <Button
+                android:id="@+id/checkout"
                 android:text="LAKUKAN PEMESANAN"
                 android:textColor="@color/white"
                 android:background="@color/custom"
