@@ -119,7 +119,6 @@ public class FragmentHome extends Fragment {
         lihat_semua = view.findViewById(R.id.lihat_semua);
         email = view.findViewById(R.id.email);
         count = view.findViewById(R.id.count);
-        email.setText(googleSignIn.getEmail());
 
         rv_doctor.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
@@ -160,6 +159,7 @@ public class FragmentHome extends Fragment {
             ll_tv.setVisibility(View.VISIBLE);
             rv_doctor.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
+            email.setText(googleSignIn.getEmail());
             getCountTotal();
             obtenerChats();
         }else{
@@ -360,5 +360,13 @@ public class FragmentHome extends Fragment {
             }
         });
         queue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (googleSignIn != null){
+            getCountTotal();
+        }
     }
 }

@@ -95,14 +95,18 @@ public class ActivityDetailProduct extends AppCompatActivity {
         rl_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                id_product = getIntent().getIntExtra("id_product", 0);
-                countQty = tv_qty.getText().toString();
-                Log.d("HAUL", countQty);
-                sendCart();
-                Intent intent = new Intent(ActivityDetailProduct.this, ActivityCart.class);
-                intent.putExtra("qty", countQty);
-                intent.putExtra("id_product", id_product);
-                startActivity(intent);
+                if (googleSignIn != null){
+                    id_product = getIntent().getIntExtra("id_product", 0);
+                    countQty = tv_qty.getText().toString();
+                    Log.d("HAUL", countQty);
+                    sendCart();
+                    Intent intent = new Intent(ActivityDetailProduct.this, ActivityCart.class);
+                    intent.putExtra("qty", countQty);
+                    intent.putExtra("id_product", id_product);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Kamu harus login dulu", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
