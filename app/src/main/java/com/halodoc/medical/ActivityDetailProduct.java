@@ -187,8 +187,6 @@ public class ActivityDetailProduct extends AppCompatActivity {
                         String html = "<style>img{display: inline; height: auto; max-width: 100%;}</style>";
                         webView.loadDataWithBaseURL("", html+descriptions, "text/html", "UTF-8", "");
 
-
-
                     }
 
                 }catch (Exception e){

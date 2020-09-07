@@ -177,6 +177,50 @@ public class ActivityCart extends AppCompatActivity {
         queue.add(request);
     }
 
+    private void getProductUpdate(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.CART+googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try{
+                    JSONObject object = response.getJSONObject(Constants.JSON_ROOT);
+                    JSONArray array = object.getJSONArray(Constants.PRODUCT_CARTS);
+
+                    for (int i = 0; i < array.length(); i++){
+                        JSONObject object1 = array.getJSONObject(i);
+                        String id = object1.getString("id_cart");
+                        String user_cart = object1.getString("id_user_cart");
+                        String image_product = object1.getString("image_product");
+                        String id_product_cart = object1.getString("id_product_cart");
+                        String date_cart = object1.getString("date_cart");
+                        String name_product = object1.getString("name_product");
+                        String qty = object1.getString("qty");
+                        String discount = object1.getString("discount");
+
+                        modalCart = new ModalCart(id, user_cart, id_product_cart, date_cart, name_product, discount, image_product, qty);
+                        modalCarts.add(modalCart);
+
+                        adapterCart = new AdapterCart(getApplicationContext(), modalCarts, new DeleteCart() {
+                            @Override
+                            public void cartDelete(String position) {
+                            }
+                        });
+                        rv_cart.setAdapter(adapterCart);
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -195,7 +239,7 @@ public class ActivityCart extends AppCompatActivity {
     @Override
     public void recreate() {
         super.recreate();
-        getProduct();
+        getProductUpdate();
     }
 
     private static class SenderAgents extends AsyncTask<Void,Void, Void> {
