@@ -1,5 +1,6 @@
 package com.halodoc.medical;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -117,5 +118,12 @@ public class ActivityTransfer extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(ActivityTransfer.this, MainActivity.class));
+        finish();
     }
 }

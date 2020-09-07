@@ -45,6 +45,7 @@ public class AdapterNews  extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
 
         ((MyAdapter) holder).title.setText(categoryModals.get(position).getName_product());
+        ((MyAdapter) holder).category.setText(categoryModals.get(position).getCategory());
         ((MyAdapter) holder).price.setText("Rp " + categoryModals.get(position).getPrice_product());
         Picasso.get().load(categoryModals.get(position).getImage_product()).into(((MyAdapter) holder).image);
         ((MyAdapter) holder).itemView.setOnClickListener(new View.OnClickListener() {

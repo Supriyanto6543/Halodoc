@@ -5,15 +5,16 @@ import java.io.Serializable;
 public class ProductModal implements Serializable {
 
     private int id_product;
-    private String name_product, image_product, deskripsi, price_product, discount;
+    private String name_product, image_product, deskripsi, price_product, discount, category;
 
-    public ProductModal(int id_product, String name_product, String image_product, String deskripsi, String price_product, String discount) {
+    public ProductModal(int id_product, String name_product, String image_product, String deskripsi, String price_product, String discount, String category) {
         this.id_product = id_product;
         this.name_product = name_product;
         this.image_product = image_product;
         this.deskripsi = deskripsi;
         this.price_product = price_product;
         this.discount = discount;
+        this.category = category;
     }
 
     public int getId_product() {
@@ -62,5 +63,13 @@ public class ProductModal implements Serializable {
 
     public void setDiscount(String discount) {
         this.discount = discount;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

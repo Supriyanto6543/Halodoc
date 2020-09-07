@@ -69,7 +69,7 @@ public class FragmentHome extends Fragment {
     ArrayList<TagModal> tm;
     ArrayList<ProductModal> productModals;
     AdapterSlider adapterSlider;
-    TextView lihat_semua;
+    TextView lihat_semua, count;
     FirebaseUser fu;
     FirebaseAuth auth;
     TextView email, doctor;
@@ -118,6 +118,8 @@ public class FragmentHome extends Fragment {
         rv_doctor = view.findViewById(R.id.rv_doctor);
         lihat_semua = view.findViewById(R.id.lihat_semua);
         email = view.findViewById(R.id.email);
+        count = view.findViewById(R.id.count);
+        email.setText(googleSignIn.getEmail());
 
         rv_doctor.setLayoutManager(new GridLayoutManager(getActivity(), 1));
 
@@ -158,6 +160,7 @@ public class FragmentHome extends Fragment {
             ll_tv.setVisibility(View.VISIBLE);
             rv_doctor.setVisibility(View.VISIBLE);
             ll_login.setVisibility(View.GONE);
+            getCountTotal();
             obtenerChats();
         }else{
             ll_tv.setVisibility(View.GONE);
@@ -180,6 +183,33 @@ public class FragmentHome extends Fragment {
         recyclerView1 = view.findViewById(R.id.recycler1);
         productModals = new ArrayList<>();
         recyclerView1.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+    }
+
+    private void getCountTotal(){
+        JsonObjectRequest objectRequest = new JsonObjectRequest(Request.Method.POST, Constants.CART_TOTAL + googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    int total = Integer.parseInt(response.getString("total"));
+
+                    if (total > 0) {
+                        count.setVisibility(View.VISIBLE);
+                        count.setText(response.getString("total"));
+                    }else{
+                        count.setVisibility(View.GONE);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(objectRequest);
     }
 
     private void getSlider(){
@@ -310,8 +340,9 @@ public class FragmentHome extends Fragment {
                         String deskripsi = object1.getString("deskripsi");
                         String price_product = object1.getString("price_product");
                         String discount = object1.getString("discount");
+                        String category = object1.getString("name_category");
 
-                        ProductModal pm = new ProductModal(Integer.parseInt(id_product), name_product, image_product, deskripsi, price_product, discount);
+                        ProductModal pm = new ProductModal(Integer.parseInt(id_product), name_product, image_product, deskripsi, price_product, discount, category);
                         productModals.add(pm);
                         adapterNews = new AdapterNews(productModals, getActivity());
                         recyclerView1.setAdapter(adapterNews);

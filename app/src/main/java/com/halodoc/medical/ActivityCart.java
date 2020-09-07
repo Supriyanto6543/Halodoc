@@ -108,7 +108,7 @@ public class ActivityCart extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SenderAgents senderAgents = new SenderAgents("mail", "subject", "message", getApplicationContext());
+                SenderAgents senderAgents = new SenderAgents(googleSignIn.getEmail(), "Konfirmasi Detail Pembayaran", "SILAHKAN TRANSFER KE DETAIL BANK DIBAWAH INI: " + "\n" + "BANK NAME: BCA " + "\n" + "BANK ACCOUNT: ADE ERDIN " + "\n" + "BANK NUMBER: 0928817371937832", ActivityCart.this);
                 senderAgents.execute();
             }
         });
