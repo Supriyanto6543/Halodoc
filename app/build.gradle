@@ -22,17 +22,17 @@ android {
         }
     }
 
-    flavorDimensions "default"
+    flavorDimensions "sandbox"
 
     productFlavors {
         sandbox {
-            buildConfigField "String", "BASE_URL", "\"https://merchant-url-sandbox.com/\""
-            buildConfigField "String", "CLIENT_KEY", "\"1213313131\""
+            buildConfigField "String", "BASE_URL", "\"https://api.sandbox.midtrans.com/v2/\""
+            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-QA48GghddGtGQRW3\""
         }
 
         production {
-            buildConfigField "String", "BASE_URL", "\"https://merchant-url-sandbox.com/\""
-            buildConfigField "String", "CLIENT_KEY", "\"1213313131\""
+            buildConfigField "String", "BASE_URL", "\"https://api.sandbox.midtrans.com/v2/\""
+            buildConfigField "String", "CLIENT_KEY", "\"SB-Mid-client-QA48GghddGtGQRW3\""
         }
     }
 

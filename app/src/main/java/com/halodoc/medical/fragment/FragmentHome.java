@@ -45,6 +45,19 @@ import com.halodoc.medical.modal.ProductModal;
 import com.halodoc.medical.modal.SliderModal;
 import com.halodoc.medical.modal.TagModal;
 import com.halodoc.medical.modal.Usuario;
+import com.midtrans.sdk.corekit.callback.TransactionFinishedCallback;
+import com.midtrans.sdk.corekit.core.LocalDataHandler;
+import com.midtrans.sdk.corekit.core.MidtransSDK;
+import com.midtrans.sdk.corekit.core.TransactionRequest;
+import com.midtrans.sdk.corekit.core.themes.CustomColorTheme;
+import com.midtrans.sdk.corekit.models.BankType;
+import com.midtrans.sdk.corekit.models.BillInfoModel;
+import com.midtrans.sdk.corekit.models.ItemDetails;
+import com.midtrans.sdk.corekit.models.UserAddress;
+import com.midtrans.sdk.corekit.models.UserDetail;
+import com.midtrans.sdk.corekit.models.snap.CreditCard;
+import com.midtrans.sdk.corekit.models.snap.TransactionResult;
+import com.midtrans.sdk.uikit.SdkUIFlowBuilder;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -56,6 +69,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+
+import static com.halodoc.medical.BuildConfig.BASE_URL;
+import static com.halodoc.medical.BuildConfig.CLIENT_KEY;
 
 public class FragmentHome extends Fragment {
 

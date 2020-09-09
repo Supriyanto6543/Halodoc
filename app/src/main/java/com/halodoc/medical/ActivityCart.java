@@ -77,6 +77,7 @@ public class ActivityCart extends AppCompatActivity {
     GoogleSignInAccount googleSignIn;
     GoogleSignInClient googleSignInClient;
     TextView msg;
+    PaymentGateway pg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -112,6 +113,7 @@ public class ActivityCart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (modalCarts.size() > 0){
+                    pg = new PaymentGateway(getApplicationContext());
                     SenderAgents senderAgents = new SenderAgents(googleSignIn.getEmail(), "Konfirmasi Detail Pembayaran", "SILAHKAN TRANSFER KE DETAIL BANK DIBAWAH INI: " + "\n" + "BANK NAME: BCA " + "\n" + "BANK ACCOUNT: ADE ERDIN " + "\n" + "BANK NUMBER: 0928817371937832", ActivityCart.this);
                     senderAgents.execute();
                 }else{
