@@ -30,6 +30,7 @@ public class Constants {
 
     public static final String JSON_ROOT = "HALODOC";
     public static final String API = "api.php?";
+    public static final String HISTORY = ROOT + API + "history=";
     public static final String CART_FIELD = "cart=";
     public static final String ID_USER_CART = "?id_user_cart=";
     public static final String ID_USER_CARTS = "&id_user_cart=";

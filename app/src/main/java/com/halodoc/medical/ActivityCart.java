@@ -148,12 +148,12 @@ public class ActivityCart extends AppCompatActivity {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_HISTORY_CART+Constants.ID_USER_CART+googleSignIn.getId(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("HISTORY SUK", response + "");
+                Log.d("BINGUNG", response + "");
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("HISTORY GAL", error.getMessage() + "");
+                Log.d("WONGS", error.getMessage() + "");
             }
         }){
             @Override
