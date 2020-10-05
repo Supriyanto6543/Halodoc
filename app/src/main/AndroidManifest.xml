@@ -40,6 +40,7 @@
         <activity android:name=".ActivityDetailProduct"/>
         <activity android:name=".ActivityCart"/>
         <activity android:name=".ActivityTransfer"/>
+        <activity android:name=".ActivityHistory"/>
     </application>
 
 </manifest>

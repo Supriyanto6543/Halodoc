@@ -6,15 +6,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.squareup.picasso.Picasso;
+
 public class ActivityDokterDetail extends AppCompatActivity {
 
     Toolbar toolbar;
     Button chat;
+    TextView title, child_title;
+    ImageView image;
+    String sTitle, sImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +30,9 @@ public class ActivityDokterDetail extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         chat = findViewById(R.id.chat);
+        title = findViewById(R.id.title);
+        image = findViewById(R.id.image);
+        child_title = findViewById(R.id.child_title);
         chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,6 +40,13 @@ public class ActivityDokterDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        sTitle = getIntent().getStringExtra("name");
+        sImage = getIntent().getStringExtra("image");
+
+        title.setText(sTitle);
+        child_title.setText(sTitle);
+        Picasso.get().load(sImage).into(image);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Detail Dokter");

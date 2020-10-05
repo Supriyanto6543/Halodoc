@@ -6,10 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.halodoc.medical.ActivityDokterDetail;
 import com.halodoc.medical.ChatEspecifico;
 import com.halodoc.medical.ChatGrupal;
 import com.halodoc.medical.R;
@@ -58,6 +61,15 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
                 }
             }
         });
+        viewHolderChats.detail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(contexto, ActivityDokterDetail.class);
+                intent.putExtra("image", listaUsuarios.get(i).getImage());
+                intent.putExtra("name", listaUsuarios.get(i).getNombre());
+                contexto.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -69,11 +81,13 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
 
         TextView name;
         ImageView image;
+        Button detail;
 
         public ViewHolderChats(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
+            detail = itemView.findViewById(R.id.chat);
         }
     }
 }

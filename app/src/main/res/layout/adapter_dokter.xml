@@ -133,7 +133,7 @@
 
                     <Button
                         android:id="@+id/chat"
-                        android:text="@string/chat"
+                        android:text="DETAIL"
                         android:textColor="@color/white"
                         android:background="@drawable/customize2"
                         android:layout_width="wrap_content"

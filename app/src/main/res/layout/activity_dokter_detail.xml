@@ -49,6 +49,7 @@
                         android:layout_height="wrap_content">
 
                         <ImageView
+                            android:id="@+id/image"
                             android:src="@drawable/docotrel1"
                             android:layout_width="140dp"
                             android:layout_height="140dp"/>
@@ -178,6 +179,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:id="@+id/child_title"
                         android:text="@string/name_doctor"
                         android:textSize="19dp"
                         android:textStyle="bold"
@@ -221,6 +223,7 @@
 
                     <Button
                         android:id="@+id/chat"
+                        android:visibility="gone"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="50dp"
                         android:text="@string/chat"

@@ -24,6 +24,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.halodoc.medical.ActivityHistory;
 import com.halodoc.medical.ActivityLangganan;
 import com.halodoc.medical.LoginGmail;
 import com.halodoc.medical.MainActivity;
@@ -40,7 +41,7 @@ public class FragmentProfile extends Fragment {
     Toolbar toolbar;
     GoogleSignInAccount googleSignIn;
     GoogleSignInClient googleSignInClient;
-    TextView email, name, tv_desc;
+    TextView email, name, tv_desc, history;
     ImageView imageView;
     LinearLayout login_field, logout_field, ll_langganan, ll_history;
     CardView cv, desc;
@@ -65,6 +66,7 @@ public class FragmentProfile extends Fragment {
         imageView = view.findViewById(R.id.image);
         name = view.findViewById(R.id.name);
         email = view.findViewById(R.id.email);
+        history = view.findViewById(R.id.history);
         login_field = view.findViewById(R.id.login_field);
         logout_field = view.findViewById(R.id.logout_field);
         ll_langganan = view.findViewById(R.id.ll_langganan);
@@ -77,6 +79,13 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ActivityLangganan.class));
+            }
+        });
+
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActivityHistory.class));
             }
         });
 
