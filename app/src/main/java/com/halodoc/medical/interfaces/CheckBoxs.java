@@ -5,5 +5,5 @@ package com.halodoc.medical.interfaces;
  * Copyright (c) 2020 Murottal Pro . All rights reserved.
  */
 public interface CheckBoxs {
-    boolean onClick(String pos);
+    boolean onClick(int pos);
 }

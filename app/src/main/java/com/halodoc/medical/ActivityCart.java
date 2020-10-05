@@ -41,8 +41,16 @@ import com.halodoc.medical.constant.Constants;
 import com.halodoc.medical.interfaces.DeleteCart;
 import com.halodoc.medical.modal.ModalCart;
 import com.squareup.picasso.Picasso;
+import com.xendit.AuthenticationCallback;
+import com.xendit.Models.Authentication;
+import com.xendit.Models.Card;
+import com.xendit.Models.Token;
+import com.xendit.Models.XenditError;
+import com.xendit.TokenCallback;
+import com.xendit.Xendit;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Array;
@@ -76,8 +84,9 @@ public class ActivityCart extends AppCompatActivity {
     RecyclerView rv_cart;
     GoogleSignInAccount googleSignIn;
     GoogleSignInClient googleSignInClient;
-    TextView msg;
+    TextView msg, price, empty;
     PaymentGateway pg;
+    Xendit xendit;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,7 +95,10 @@ public class ActivityCart extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         checkout = findViewById(R.id.checkout);
+        xendit = new Xendit(this, "a38f77ab285e5a69f66d671c4a86c2b06387f75d6598e8e8af07cfc4b3a99167");
         msg = findViewById(R.id.msg);
+        price = findViewById(R.id.price);
+        empty = findViewById(R.id.empty);
 
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getResources().getString(R.string.client_google))
@@ -112,10 +124,11 @@ public class ActivityCart extends AppCompatActivity {
         checkout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
                 if (modalCarts.size() > 0){
-                    pg = new PaymentGateway(getApplicationContext());
                     SenderAgents senderAgents = new SenderAgents(googleSignIn.getEmail(), "Konfirmasi Detail Pembayaran", "SILAHKAN TRANSFER KE DETAIL BANK DIBAWAH INI: " + "\n" + "BANK NAME: BCA " + "\n" + "BANK ACCOUNT: ADE ERDIN " + "\n" + "BANK NUMBER: 0928817371937832", ActivityCart.this);
                     senderAgents.execute();
+                    history();
                 }else{
                     Toast.makeText(getApplicationContext(), "Keranjang Anda Kosong", Toast.LENGTH_LONG).show();
                 }
@@ -124,10 +137,34 @@ public class ActivityCart extends AppCompatActivity {
 
         if (googleSignIn != null){
             getProduct();
+            getTotal();
         }else{
             msg.setVisibility(View.VISIBLE);
         }
 
+    }
+
+    private void history(){
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_HISTORY_CART+Constants.ID_USER_CART+googleSignIn.getId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("HISTORY SUK", response + "");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("HISTORY GAL", error.getMessage() + "");
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("id_user_cart", String.valueOf(googleSignIn.getId()));
+                return map;
+            }
+        };
+
+        queue.add(request);
     }
 
     private void getProduct(){
@@ -146,10 +183,13 @@ public class ActivityCart extends AppCompatActivity {
                         String id_product_cart = object1.getString("id_product_cart");
                         String date_cart = object1.getString("date_cart");
                         String name_product = object1.getString("name_product");
+                        String harga = object1.getString("harga");
                         String qty = object1.getString("qty");
                         String discount = object1.getString("discount");
 
-                        modalCart = new ModalCart(id, user_cart, id_product_cart, date_cart, name_product, discount, image_product, qty);
+                        Log.d("PUPUS", "ID: " + id + " USER: " + user_cart + " ID PRODU: " + id_product_cart + " HARGA: " + harga + " QTY " + qty + "\n");
+
+                        modalCart = new ModalCart(id, user_cart, id_product_cart, date_cart, name_product, harga, image_product, qty);
                         modalCarts.add(modalCart);
 
                         adapterCart = new AdapterCart(getApplicationContext(), modalCarts, new DeleteCart() {
@@ -166,6 +206,40 @@ public class ActivityCart extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
+    private void getTotal(){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.CART_TOTAL_COUNT+googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String total = response.getString("total");
+                    try{
+                        int cv_total = Integer.parseInt(total + "");
+                        if (cv_total > 0){
+                            price.setVisibility(View.VISIBLE);
+                            checkout.setVisibility(View.VISIBLE);
+                            price.setText("Total Rp: " + total);
+                            checkout.setVisibility(View.VISIBLE);
+                        }else{
+                            empty.setVisibility(View.VISIBLE);
+                            price.setVisibility(View.GONE);
+                            checkout.setVisibility(View.GONE);
+                        }
+                    }catch (Exception e){
+                        Log.d("SUPRI", e.getMessage() + "");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

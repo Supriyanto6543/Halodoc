@@ -52,12 +52,12 @@ public class ActivityDetailProduct extends AppCompatActivity {
     RequestQueue queue;
     RelativeLayout rl_cart;
     WebView webView;
-    TextView title, tv_qty, count;
+    TextView title, tv_qty, count, price;
     ImageView image, add, remove;
     int id_product, qty = 1;
     GoogleSignInAccount googleSignIn;
     GoogleSignInClient googleSignInClient;
-    String countQty;
+    String getPrice;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,6 +82,7 @@ public class ActivityDetailProduct extends AppCompatActivity {
         tv_qty = findViewById(R.id.tv_qty);
         image = findViewById(R.id.image);
         title = findViewById(R.id.title);
+        price = findViewById(R.id.price);
         webView = findViewById(R.id.webview);
         toolbar = findViewById(R.id.toolbar);
 
@@ -97,12 +98,13 @@ public class ActivityDetailProduct extends AppCompatActivity {
             public void onClick(View v) {
                 if (googleSignIn != null){
                     id_product = getIntent().getIntExtra("id_product", 0);
-                    countQty = tv_qty.getText().toString();
-                    Log.d("HAUL", countQty);
-                    sendCart();
+                    getPrice = price.getText().toString();
+                    int total = Integer.valueOf(getPrice) * qty;
+                    //sendCart(total, qty);
+                    checkCart(id_product, total, qty);
                     Intent intent = new Intent(ActivityDetailProduct.this, ActivityCart.class);
-                    intent.putExtra("qty", countQty);
                     intent.putExtra("id_product", id_product);
+                    intent.putExtra("price", getPrice);
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(), "Kamu harus login dulu", Toast.LENGTH_LONG).show();
@@ -142,8 +144,54 @@ public class ActivityDetailProduct extends AppCompatActivity {
 
     }
 
-    private void sendCart(){
-        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_INSERT_CART+Constants.ID_USER_CART+googleSignIn.getId()+Constants.ID_PRODUCT_CART+id_product+Constants.QTY+countQty, new Response.Listener<String>() {
+    private void checkCart(final int id_cart, final int total, final int qty){
+        Log.d("SALASA", Constants.URL_CHECK_CART + Constants.CHECK_CART + id_cart + Constants.ID_USER_CARTS + googleSignIn.getId());
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_CHECK_CART + Constants.CHECK_CART + id_cart + Constants.ID_USER_CARTS + googleSignIn.getId(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equals("benar")){
+                    Log.d("UPDATEDATA", "BENAR");
+                    updateCart(id_cart, total, qty);
+                }else{
+                    Log.d("DATASALAH", "SALAH");
+                    sendCart(total, qty);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ASSALAM", error.getMessage());
+            }
+        });
+        queue.add(request);
+    }
+
+    private void updateCart(int id_cart, final int total, final int qty){
+        Log.d("UPDATEBRO", Constants.URL_UPDATE_CART + Constants.ID_USER_CART + googleSignIn.getId() + Constants.ID_PRODUCT_CART+id_cart);
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_UPDATE_CART + Constants.ID_USER_CART + googleSignIn.getId() + Constants.ID_PRODUCT_CART+id_cart, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("ROZI", "rozi");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("ASSALAM", error.getMessage());
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("harga", String.valueOf(total));
+                map.put("qty", String.valueOf(qty));
+                return map;
+            }
+        };
+        queue.add(request);
+    }
+
+    private void sendCart(final int price, final int qty){
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_INSERT_CART+Constants.ID_USER_CART+googleSignIn.getId()+Constants.ID_PRODUCT_CART+id_product, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("BINGUNG", response + "");
@@ -159,7 +207,8 @@ public class ActivityDetailProduct extends AppCompatActivity {
                 Map<String, String> map = new HashMap<>();
                 map.put("id_user_cart", String.valueOf(googleSignIn.getId()));
                 map.put("id_product_cart", String.valueOf(id_product));
-                map.put("qty", countQty);
+                map.put("harga", String.valueOf(price));
+                map.put("qty", String.valueOf(qty));
                 return map;
             }
         };
@@ -187,6 +236,7 @@ public class ActivityDetailProduct extends AppCompatActivity {
                         Log.d("WEDOK", name_product + descriptions);
 
                         title.setText(name_product);
+                        price.setText(price_product);
                         Picasso.get().load(image_product).into(imageView);
                         String html = "<style>img{display: inline; height: auto; max-width: 100%;}</style>";
                         webView.loadDataWithBaseURL("", html+descriptions, "text/html", "UTF-8", "");

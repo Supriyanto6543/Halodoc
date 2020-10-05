@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.halodoc.medical.ActivityCart;
@@ -95,6 +97,7 @@ public class FragmentHome extends Fragment {
     GoogleSignInClient googleSignInClient;
     LinearLayout ll_login, ll_tv, ll_cart;
     Button btn_login;
+    RelativeLayout root;
 
     @Nullable
     @Override
@@ -116,6 +119,7 @@ public class FragmentHome extends Fragment {
         initsNews(view);
 
         ll_cart = view.findViewById(R.id.ll_cart);
+        root = view.findViewById(R.id.root);
         ll_tv = view.findViewById(R.id.ll_tv);
         ll_login = view.findViewById(R.id.ll_login);
         btn_login = view.findViewById(R.id.btn_login);
@@ -141,7 +145,11 @@ public class FragmentHome extends Fragment {
         ll_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ActivityCart.class));
+                if (googleSignIn != null){
+                    startActivity(new Intent(getActivity(), ActivityCart.class));
+                }else{
+                    Snackbar.make(root, "Kamu harus masuk dulu", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 

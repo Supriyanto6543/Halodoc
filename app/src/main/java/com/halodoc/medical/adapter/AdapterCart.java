@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.halodoc.medical.R;
+import com.halodoc.medical.interfaces.CheckBoxs;
 import com.halodoc.medical.interfaces.DeleteCart;
 import com.halodoc.medical.modal.ModalCart;
 import com.squareup.picasso.Picasso;
@@ -46,7 +47,8 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyCart> {
     @Override
     public void onBindViewHolder(@NonNull AdapterCart.MyCart holder, final int position) {
         holder.title.setText(modalCarts.get(position).getTitle());
-        holder.price.setText(modalCarts.get(position).getAmount());
+        holder.price.setText("Rp: " + modalCarts.get(position).getAmount());
+        holder.qty.setText("(" + modalCarts.get(position).getQty() + "x)" + "");
         Picasso.get().load(modalCarts.get(position).getImage()).into(holder.image);
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,14 +65,16 @@ public class AdapterCart extends RecyclerView.Adapter<AdapterCart.MyCart> {
 
     public class MyCart extends RecyclerView.ViewHolder{
 
-        private TextView title, price, remove;
-        private ImageView image;
+        private TextView title, price, qty;
+        private ImageView image, remove;
+
 
         public MyCart(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title);
             price = itemView.findViewById(R.id.price);
+            qty = itemView.findViewById(R.id.qty);
             remove = itemView.findViewById(R.id.remove);
             image = itemView.findViewById(R.id.image);
         }

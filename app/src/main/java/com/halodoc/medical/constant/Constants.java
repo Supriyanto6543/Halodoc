@@ -6,7 +6,8 @@ package com.halodoc.medical.constant;
  */
 public class Constants {
 
-    public static String ROOT_URL = "http://192.168.2.26/halodoc/chat/";
+    //public static String ROOT_URL = "http://halodoc.go-cow.com/chat/";
+    public static String ROOT_URL = "http://192.168.43.210/halodoc/chat/";
     public static String URL_LOGIN = ROOT_URL + "login.php";
     public static String URL_USUARIOS = ROOT_URL + "listdokter.php";
     public static String URL_ENVIAR_MENSAJE = ROOT_URL + "insertarMensaje.php";
@@ -14,12 +15,16 @@ public class Constants {
     public static String URL_OBTENER_MENSAJES = ROOT_URL + "obtenerMensajes.php";
     public static String URL_OBTENER_MENSAJES_GRUPAL = ROOT_URL + "obtenerMensajesGrupales.php";
     public static String URL_INSERT_CART = ROOT_URL + "insertcart.php";
+    public static String URL_HISTORY_CART = ROOT_URL + "history.php";
+    public static String URL_CHECK_CART = ROOT_URL + "checkcart.php";
+    public static String URL_UPDATE_CART = ROOT_URL + "updatecart.php";
 
     public static String UNIQUE_ID = "?unique_id=";
     public static String USUARIODESTINO = "&usuarioDestino=";
 
     public static final String GOOGLE_ACCOUNT = "google_account";
-    public static final String ROOT = "http://192.168.2.26/halodoc/";
+    //public static final String ROOT = "http://halodoc.go-cow.com/";
+    public static final String ROOT = "http://192.168.43.210/halodoc/";
     public static final String FIELD = ROOT + "field/";
     public static final String URL_DOKTER_HOME = ROOT + "api.php?dokter_home&";
 
@@ -27,10 +32,14 @@ public class Constants {
     public static final String API = "api.php?";
     public static final String CART_FIELD = "cart=";
     public static final String ID_USER_CART = "?id_user_cart=";
+    public static final String ID_USER_CARTS = "&id_user_cart=";
+    public static final String CHECK_CART = "?check_product=";
     public static final String ID_PRODUCT_CART = "&id_product_cart=";
     public static final String QTY = "&qty=";
     public static final String BANK = ROOT + API + "bank";
     public static final String CART_TOTAL = ROOT + API + "cart_count=";
+    public static final String CART_TOTAL_COUNT = ROOT + API + "cart_total=";
+    public static final String  CART_PRODUCT = "&cart_product=";
 
     public static final String PRODUCT_FIELD_DETAIL = "detail_product=";
     public static final String PRODUCT_FIELD = "product";
