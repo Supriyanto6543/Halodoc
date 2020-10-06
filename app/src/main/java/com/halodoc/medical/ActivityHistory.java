@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -69,6 +70,7 @@ public class ActivityHistory extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         rv_history = findViewById(R.id.rv_history);
         queue = Volley.newRequestQueue(getApplicationContext());
+        rv_history.setLayoutManager(new GridLayoutManager(this, 1));
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Detail Dokter");
@@ -89,15 +91,14 @@ public class ActivityHistory extends AppCompatActivity {
 
                     for (int i = 0; i < array.length(); i++){
                         JSONObject object1 = array.getJSONObject(i);
-                        String id = object1.getString("id_cart");
-                        String user_cart = object1.getString("id_user_cart");
+                        String id = object1.getString("id_history");
+                        String user_cart = object1.getString("id_user_history");
                         String image_product = object1.getString("image_product");
-                        String id_product_cart = object1.getString("id_product_cart");
-                        String date_cart = object1.getString("date_cart");
+                        String id_product_cart = object1.getString("id_product_history");
+                        String date_cart = object1.getString("date_history");
                         String name_product = object1.getString("name_product");
-                        String harga = object1.getString("harga");
-                        String qty = object1.getString("qty");
-                        String discount = object1.getString("discount");
+                        String harga = object1.getString("harga_history");
+                        String qty = object1.getString("qty_history");
 
                         Log.d("PUPUS", "ID: " + id + " USER: " + user_cart + " ID PRODU: " + id_product_cart + " HARGA: " + harga + " QTY " + qty + "\n");
 
