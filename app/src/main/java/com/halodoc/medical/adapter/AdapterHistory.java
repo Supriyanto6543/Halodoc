@@ -36,7 +36,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MyCart> 
     @NonNull
     @Override
     public AdapterHistory.MyCart onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.adapter_cart, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.adapter_history, parent, false);
 
         return new MyCart(view);
     }
