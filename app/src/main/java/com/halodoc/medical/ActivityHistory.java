@@ -82,6 +82,7 @@ public class ActivityHistory extends AppCompatActivity {
     }
 
     private void getHistory(){
+        Log.d("LUWAK", Constants.HISTORY+googleSignIn.getId());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, Constants.HISTORY+googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

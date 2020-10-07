@@ -6,8 +6,8 @@ package com.halodoc.medical.constant;
  */
 public class Constants {
 
-    //public static String ROOT_URL = "http://halodoc.go-cow.com/chat/";
-    public static String ROOT_URL = "http://192.168.43.210/halodoc/chat/";
+    public static String ROOT_URL = "http://halodoc.go-cow.com/chat/";
+    //public static String ROOT_URL = "http://192.168.43.210/halodoc/chat/";
     public static String URL_LOGIN = ROOT_URL + "login.php";
     public static String URL_USUARIOS = ROOT_URL + "listdokter.php";
     public static String URL_ENVIAR_MENSAJE = ROOT_URL + "insertarMensaje.php";
@@ -23,8 +23,8 @@ public class Constants {
     public static String USUARIODESTINO = "&usuarioDestino=";
 
     public static final String GOOGLE_ACCOUNT = "google_account";
-    //public static final String ROOT = "http://halodoc.go-cow.com/";
-    public static final String ROOT = "http://192.168.43.210/halodoc/";
+    public static final String ROOT = "http://halodoc.go-cow.com/";
+    //public static final String ROOT = "http://192.168.43.210/halodoc/";
     public static final String FIELD = ROOT + "field/";
     public static final String URL_DOKTER_HOME = ROOT + "api.php?dokter_home&";
 

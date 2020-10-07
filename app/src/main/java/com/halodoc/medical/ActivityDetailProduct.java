@@ -160,7 +160,7 @@ public class ActivityDetailProduct extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("ASSALAM", error.getMessage());
+                Log.d("ASSALAM", error.getMessage() + "");
             }
         });
         queue.add(request);
@@ -191,6 +191,7 @@ public class ActivityDetailProduct extends AppCompatActivity {
     }
 
     private void sendCart(final int price, final int qty){
+        Log.d("purs", Constants.URL_INSERT_CART+Constants.ID_USER_CART+googleSignIn.getId()+Constants.ID_PRODUCT_CART+id_product);
         StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_INSERT_CART+Constants.ID_USER_CART+googleSignIn.getId()+Constants.ID_PRODUCT_CART+id_product, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

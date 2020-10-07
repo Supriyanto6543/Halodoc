@@ -47,12 +47,6 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MyCart> 
         holder.price.setText("Rp: " + modalCarts.get(position).getAmount());
         holder.qty.setText("(" + modalCarts.get(position).getQty() + "x)" + "");
         Picasso.get().load(modalCarts.get(position).getImage()).into(holder.image);
-        holder.remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deleteCart.cartDelete(modalCarts.get(position).getId_cart());
-            }
-        });
     }
 
     @Override
@@ -63,7 +57,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MyCart> 
     public class MyCart extends RecyclerView.ViewHolder{
 
         private TextView title, price, qty;
-        private ImageView image, remove;
+        private ImageView image;
 
 
         public MyCart(@NonNull View itemView) {
@@ -72,7 +66,6 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.MyCart> 
             title = itemView.findViewById(R.id.title);
             price = itemView.findViewById(R.id.price);
             qty = itemView.findViewById(R.id.qty);
-            remove = itemView.findViewById(R.id.remove);
             image = itemView.findViewById(R.id.image);
         }
     }
