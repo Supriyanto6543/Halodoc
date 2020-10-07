@@ -200,6 +200,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:id="@+id/praktik"
                         android:text="Puskesmas Kec. Bantimurung Kab. Maros, Sulsel"
                         android:textSize="17dp"
                         android:layout_width="match_parent"
@@ -215,6 +216,7 @@
                         android:layout_height="wrap_content"/>
 
                     <TextView
+                        android:id="@+id/no_str"
                         android:text="7321100118183820"
                         android:textSize="17dp"
                         android:textColor="@color/black"

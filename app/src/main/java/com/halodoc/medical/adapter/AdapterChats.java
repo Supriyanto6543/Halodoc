@@ -44,6 +44,8 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
     public void onBindViewHolder(@NonNull AdapterChats.ViewHolderChats viewHolderChats, final int i) {
         viewHolderChats.name.setText(listaUsuarios.get(i).getNombre());
         Picasso.get().load(listaUsuarios.get(i).getImage()).into(viewHolderChats.image);
+        viewHolderChats.rating.setText(listaUsuarios.get(i).getSuka() + "%");
+        viewHolderChats.experience.setText(listaUsuarios.get(i).getPengetahuan() + " %");
 
         viewHolderChats.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,10 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
                 Intent intent = new Intent(contexto, ActivityDokterDetail.class);
                 intent.putExtra("image", listaUsuarios.get(i).getImage());
                 intent.putExtra("name", listaUsuarios.get(i).getNombre());
+                intent.putExtra("suka", listaUsuarios.get(i).getSuka());
+                intent.putExtra("pengetahuan", listaUsuarios.get(i).getPengetahuan());
+                intent.putExtra("temp_prak", listaUsuarios.get(i).getTemp_praktik());
+                intent.putExtra("no_str", listaUsuarios.get(i).getNo_str());
                 contexto.startActivity(intent);
             }
         });
@@ -79,7 +85,7 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
 
     public class ViewHolderChats extends RecyclerView.ViewHolder {
 
-        TextView name;
+        TextView name, rating, experience;
         ImageView image;
         Button detail;
 
@@ -88,6 +94,8 @@ public class AdapterChats extends RecyclerView.Adapter<AdapterChats.ViewHolderCh
             name = itemView.findViewById(R.id.title);
             image = itemView.findViewById(R.id.image);
             detail = itemView.findViewById(R.id.chat);
+            rating = itemView.findViewById(R.id.rating);
+            experience = itemView.findViewById(R.id.experience);
         }
     }
 }

@@ -93,7 +93,11 @@ public class ActivityChats extends AppCompatActivity {
                                 objeto.getString("unique_id"),
                                 objeto.getString("email"),
                                 objeto.getString("username"),
-                                objeto.getString("photo")
+                                objeto.getString("photo"),
+                                objeto.getString("suka"),
+                                objeto.getString("pengetahuan"),
+                                objeto.getString("temp_praktik"),
+                                objeto.getString("no_str")
                         );
 
                         listaUsuarios.add(usuario);

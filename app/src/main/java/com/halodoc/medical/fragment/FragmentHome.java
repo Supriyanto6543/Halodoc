@@ -304,6 +304,7 @@ public class FragmentHome extends Fragment {
 
     public void obtenerChats() {
         listaUsuarios.clear();
+        Log.d("makantuh", Constants.URL_DOKTER_HOME + Constants.UNIQUE_ID + googleSignIn.getId());
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, Constants.URL_DOKTER_HOME + Constants.UNIQUE_ID + googleSignIn.getId(), null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -317,7 +318,11 @@ public class FragmentHome extends Fragment {
                                 objeto.getString("unique_id"),
                                 objeto.getString("email"),
                                 objeto.getString("username"),
-                                objeto.getString("photo")
+                                objeto.getString("photo"),
+                                objeto.getString("suka"),
+                                objeto.getString("pengetahuan"),
+                                objeto.getString("temp_praktik"),
+                                objeto.getString("no_str")
                         );
 
                         listaUsuarios.add(usuario);
