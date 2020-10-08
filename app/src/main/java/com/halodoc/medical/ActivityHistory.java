@@ -73,7 +73,7 @@ public class ActivityHistory extends AppCompatActivity {
         rv_history.setLayoutManager(new GridLayoutManager(this, 1));
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Detail Dokter");
+        getSupportActionBar().setTitle("Detail History");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 

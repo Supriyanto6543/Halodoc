@@ -121,17 +121,19 @@ public class ChatEspecifico extends AppCompatActivity {
     }
 
     public void enviarMensaje(final String s) {
+        Log.d("mensajesss", Constants.URL_ENVIAR_MENSAJE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_ENVIAR_MENSAJE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         obtenerMensajes();
                         etTexto.setText("");
+                        Log.d("bambang", response + "");
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.getMessage();
+                Log.d("errorse", error.getMessage() + "");
             }
         }){
             @Override
